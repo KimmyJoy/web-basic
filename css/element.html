@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* id */
+        #div_id{
+            /* selector 기법중 하나 접두에 #붙이기 */
+            color: darkblue;
+        }
+        /* class */
+        .div_class{
+            background-color: grey;
+        }
+        .div_class2{
+            width: 30px;
+            background-color: cornflowerblue;
+        }
+    </style>
+</head>
+<body>
+    <!-- div를 많이 쓰는 이유: 없다...그냥 암것도 아닌놈에게 하고 싶은거다 -->
+    <div class="div_class">div1</div>
+    <!-- class, name는 중복 되지만 id는 중복이 되지 않음 -->
+    <div id="div_id" class="div_class div_class2">div2</div>
+    <!-- name은 잘 안씀 -->
+    <div name="div_name">div3</div>
+</body>
+</html>
