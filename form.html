@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="target.html">
+      <!-- 위에 있는 것이 vo처럼 감싸서 어디론가 보내는 것......이냐? 비워져있으면 자기 자신을 한번 더 호출함 -->
+      First name:<br />
+      <input type="text" />
+      <br />
+      Last name:<br />
+      <input type="text" />
+      <br /><br />
+      <!-- name으로 그룹핑함 저 부분이 같아야함 -->
+      <input type="radio" name="language" />Java<br />
+      <input type="radio" name="language" />HTML<br />
+      <input type="radio" name="language" />Python <br /><br />
+      <hr />
+      <input type="checkbox" />웹 프로그래머<br />
+      <input type="checkbox" />서버 개발<br />
+      <input type="checkbox" />웹 개발<br />
+      <br /><br />
+      <input type="color" />
+      <br /><br />
+      <input type="date" />
+      <br /><br />
+      <label for="email">Enter your email:</label>
+      <input type="email" id="email" name="email" />
+      <br /><br />
+      <label for="myfile">Select a file:</label>
+      <input type="file" id="myfile" name="myfile" />
+      <br /><br />
+      <input type="password" />
+      <br /><br />
+      <select name="" id="">
+        <option value="male">남</option>
+        <option value="female">여</option>
+      </select>
+      <br /><br />
+      <textarea id="" name="" cols="50" rows="15">
+At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.</textarea
+      >
+      <br /><br />
+      <input type="submit" value="가입" />
+      <!-- type=button은 옮겨지지 않음 보통 form에서는 submit이 주로 사용됨-->
+      <input type="reset" value="날리기" />
+      <!-- form 안에서만 존재하고 초기화임 -->
+    </form>
+  </body>
+</html>
