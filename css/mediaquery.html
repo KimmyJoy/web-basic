@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: crimson;
+        }
+
+        @media (max-width: 600px){ 
+            /* 300px이 넘으면 색이 하단에 적은 것으로 변경됨 */
+        body{
+            background-color: bisque;
+        }
+
+        @media (max-width: 300px){
+            body{
+                background-color: cadetblue;
+            }
+        }
+
+    }
+    @media screen and(max-width: 300px) {
+        li{
+            display: block;
+        }
+    }
+    @media screen and (min-width: 200px) {
+        
+        li {
+            display: inline;
+        }
+    }
+    </style>
+</head>
+<body>
+    <nav>
+        <li>아메리카노</li>
+        <li>카페라떼</li>
+        <li>녹차</li>
+        <li>국화차</li>
+    </nav>
+</body>
+</html>
