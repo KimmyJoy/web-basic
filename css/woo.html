@@ -24,14 +24,16 @@ li {
     html{
         font-family: 'Nanum Gothic', sans-serif;
         color: aliceblue;
-    background-image: url(unu.jpg) ;
-    background-size:auto;
+        background-image: url(unu.jpg) ;
+        background-size:auto;
     }
        #button{
+        display: flex;
+        align-items: center;
+        justify-content:right;
         position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgb(71, 81, 88);
+        padding: 10px 0 10px 5px;
+        background-color: rgb(108, 76, 150);
         width: 100%
        }
        body{
@@ -41,12 +43,19 @@ li {
         position: relative;
        }
        #para{
-        position: absolute; top: 50%; left:50%; transform: translate(-50%, -50%); margin-top: 25%;
+        position: absolute; 
+        top: 50%; left:50%; transform: translate(-50%, -50%); margin-top: 25%;
        }
+       #star{
+        position: absolute;
+        top: 33%;
+        left: 2%;
+      }
     </style>
 </head>
 <body>
     <div id="button">
+      <div id="star"><button onclick="window.close()">💻</button></div>
       <ul>
         <li>Contact</li>
         <li>Projects</li>
@@ -57,7 +66,7 @@ li {
     <div id="main">
       <div id="para">
         <p>안녕하세요?</p>
-        <p>저는 프론트엔드 개발자입니다.</p>
+        <p>저는 프론트엔드를 찍먹중인 개발자 지망생입니다.</p>
       </div>
     <div id="viewbutton"></div>
 </div>
