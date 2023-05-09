@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="utils.js"></script>
+    <!-- 로직을 분리하는 방식 -->
+</head>
+<body>
+    <script>
+        function hello(){
+            // var i = 10;
+            // var i = 'asedfa'
+            let i;
+            i = 10;
+
+            const text = "Hello";
+            // 자바의 final과 같음 상수는 const를 사용하면 됨 하지만 변경할 일이 생긴다면 let를 사용
+
+            alert("안녕!!!");
+            //세미콜론은 써도 되고 안써도 됨 순서 상관없이 이쪽이 먼저 실행된다 근데 위처럼은 안씀
+        }
+        
+    </script>
+    <div onclick="javascript:alert('click')">여기는 버튼이다</div>
+    <!-- 위 태그 추가 후 브라우저상에서 클릭을 하면 클릭 팝업이 뜸 -->
+    <!-- 스크립트 태그는 아무데나 써도 됨 -->
+
+    <div onclick="javascript:hi()">Hello</div>
+    <!-- 이런식으로 해도 되지만 브라우저 상에서 f12로 콘솔태그에 바로 실행 가능함 -->
+    <div onclick="javascript:name()">이름</div>
+
+</body>
+</html>
