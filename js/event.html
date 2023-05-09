@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: royalblue;
+        }
+    </style>
+    <script>
+        function changeColor(color) {
+            let box = document.getElementById('box');
+            box.style.backgroundColor = color;
+        }
+    //    /* function changeBrownColor() {
+    //         let box = document.getElementById('box');
+    //         box.style.backgroundColor = 'brown';
+    //     }
+    //     function changeYellowColor() {
+    //         let box = document.getElementById('box');
+    //         box.style.backgroundColor = '#ffff00';
+    //     }
+    //     //위 코드는 굉장히 안 좋은 코드임 메소드에 이름이 있다보니...이름별로 다 만들어야하는 안좋은 점이 있음 일반화 하는 것이 좋음
+    //     // 일반화 --> 공통되는 코드를 다 묶는 것
+    //      */
+    // function showAlert() {
+    //     alert('Hello World');
+        
+    // }
+    // function showAlert2() {
+    //     alert('안녕하세요');
+        
+    // }
+    function showAlert(element) {
+      console.log(element.textContent);//타입을 모르므로 자동완성이 되지 않음...
+      alert(element.textContent);
+    }
+    </script>
+</head>
+<body>
+    <div id="box" onmouseover="changeColor('#ff0000')" onmouseleave="changeColor('#ffff00')"></div>
+
+  <div class="big" onclick="showAlert(this)">Hello World</div>
+  <!-- this로 하단에 넘길 수가 있음 다형성 같이 한 메소드로 활용하는 것...-->
+  <div onclick="showAlert(this)">안녕하세요</div>
+</body>
+</html>
