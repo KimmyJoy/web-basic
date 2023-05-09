@@ -6,26 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <!-- <script>
+<!-- <script>
+    <script>
         //여기서 let 이 아니고 var를 쓰면 for문 바깥에서도 동일한 값으로 살아있어서 엉망이 됨
         for (let i = 0; i < 10; i++){
             console.log(i);
         }
-    </script> -->
-<!-- pormpt도 숫자를 입력받아도 string으로 받는다 자바의 복잡한 string으로 받은걸 int 변환하는 그런 형태를 취하지 않아도 됨-->
+    </script> 
+pormpt도 숫자를 입력받아도 string으로 받는다 자바의 복잡한 string으로 받은걸 int 변환하는 그런 형태를 취하지 않아도 됨
 <script>
     function numEnter() {
-    let x=prompt("숫자를 입력해주세요")
+        const x=prompt("숫자를 입력해주세요")
 
     if(isNaN(x) || x === null || x === ""){
+        if (x === null) {
+            alert('취소를 선택하셨습니다');
+            
+        }
         alert('잘못 입력하셨습니다');
         numEnter();
-    } else {
-        if (!(1<=x && x<=100)) {
+    } else if (!(1<=x && x<=100)) {
             alert('1 이상 100 이하를 넣어주세요');
             numEnter();
-        } else {
+    } else {
             for(let i = 1; i < 101; i++){
                 console.log(i);
             }
@@ -35,7 +38,29 @@
 }
 </script>
 
-<div onclick="javascript:numEnter();">숫자</div>
+<div onclick="javascript:numEnter();">숫자</div> -->
 
+<script>
+function solution(){
+    const num = prompt('숫자 입력');
+
+    //숫자가 아니면 '숫자를 입력해 주세요' 라고 경고창을 띄웁니다.
+    //숫자가 맞고 1 이상 혹은 100 이하가 아니면 '1이상 100 이하를 넣어주세요' 경고창을 띄웁니다.
+    if(isNaN(num)){
+        alert('숫자를 입력해 주세요');
+    } else if (!(1 <= num && num <= 100)){
+        alert('1이상 100 이하를 넣어주세요');
+    } else {
+        // 숫자가 1이상 100이하 라면 1에서 100 까지 차례대로 로그로 찍어주고
+        for (let i = 1; i <= 100; i++){
+            console.log(i);
+        }
+        if(i === num){
+        alert('완료되었습니다');
+        }
+    }
+}
+</script>
+<button onclick="javascript:solution();">버튼</button>
 </body>
 </html>
