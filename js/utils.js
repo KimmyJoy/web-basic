@@ -29,12 +29,3 @@ function enterName() { //함수이름은 동사로 하는게 좋다. ctrl+f2로 
     }
 }
 }
-
-
-function name(params) {
-    
-}
-
-function name(params) {
-    
-}

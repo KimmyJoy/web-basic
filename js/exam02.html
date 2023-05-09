@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <script>
+        //여기서 let 이 아니고 var를 쓰면 for문 바깥에서도 동일한 값으로 살아있어서 엉망이 됨
+        for (let i = 0; i < 10; i++){
+            console.log(i);
+        }
+    </script> -->
+<!-- pormpt도 숫자를 입력받아도 string으로 받는다 자바의 복잡한 string으로 받은걸 int 변환하는 그런 형태를 취하지 않아도 됨-->
+<script>
+    function numEnter() {
+    let x=prompt("숫자를 입력해주세요")
+
+    if(isNaN(x) || x === null || x === ""){
+        alert('잘못 입력하셨습니다');
+        numEnter();
+    } else {
+        if (!(1<=x && x<=100)) {
+            alert('1 이상 100 이하를 넣어주세요');
+            numEnter();
+        } else {
+            for(let i = 1; i < 101; i++){
+                console.log(i);
+            }
+            alert("완료되었습니다.");
+        }
+    }
+}
+</script>
+
+<div onclick="javascript:numEnter();">숫자</div>
+
+</body>
+</html>
