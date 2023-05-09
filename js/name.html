@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function isEmpty(text) {
+            return text === null || text.length === 0;
+        }
+
+        //이름을 입력 받고
+        let name = prompt('이름을 입력해 주세요');
+
+        // 이름이 입력되지 않았을때 '입력해주세요' 라고 물어보고 다시 입력받고
+        //주의 : 항상 null과 내용 체크를 둘다 해야한다
+        if (isEmpty(name)) {
+            name = prompt('입력해 주세요!!!!');           
+        }
+
+        // 이름이 입력 되었을때 로그에 이름을 띄우고 경고창으로 '누구누구님 안녕하세요.' 를 띄워줌
+        if (!isEmpty(name)){
+            console.log(name);
+            alert(name+"님 안녕하세요");
+        }
+
+    </script>
+</body>
+</html>

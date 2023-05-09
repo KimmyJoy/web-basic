@@ -16,8 +16,9 @@ function total(x, y) {
     return x + y;
 }
 
-function enterName() {
-    let x = prompt('이름을 입력해주세요');
+function enterName() { //함수이름은 동사로 하는게 좋다. ctrl+f2로 하면 동일한 이름들 다 바뀐다
+    let x = prompt('이름을 입력해주세요');//자바 스크립트는 자바와 비교하면서 배우는게 좋다
+    //여기는 이름이 바뀔 일이 없기 때문에 let 아닌 const로 쓰는게 좋다
     while ( x === '' || x=== null){
         alert('입력해주세요');
         enterName();
