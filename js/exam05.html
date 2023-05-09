@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jsexam04.js"></script>
+<style>
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style:normal;
+}
+body{
+    background-color: #F7EDE2
+}
+#html {
+    font-family: 'Pretendard-Regular';
+    font-size: x-large;
+}
+.content{
+    display: inline-block;
+    background-color: #F6BD60;
+    border-radius: 8%;
+    box-sizing: border-box;
+    margin: 40px 1px;
+    text-align: center;
+    width: 7em;
+    line-height: 3em;
+    color: #006D77;
+    /* border: 14px #F6BD60 solid;  */
+}
+</style>
+</head>
+<body>
+    <div id="html">
+        <span class="content" onclick="changebyClick(this)" id="texthtml">html</span>
+        <span class="content" onclick="changebyClick(this)" id="textcss">css</span>
+        <span class="content" onclick="changebyClick(this)" id="textjavascript">javascript</span>
+        <!-- <span class="content" onmouseover="changehtmlLine()" id="texthtml">html</span>
+        <span class="content" onmouseover="changehtmlLine()" id="textcss">css</span>
+        <span class="content" onmouseover="changehtmlLine()" id="textjavascript">javascript</span> -->
+    </div>
+</body>
+</html>
