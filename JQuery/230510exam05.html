@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.4.js"
+      integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+    <script></script>
+    <style>
+      @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+      .notosanskr * {
+        font-family: "Noto Sans KR", sans-serif;
+      }
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .input {
+        border:2px solid rgb(51, 67, 141);
+      }
+      fieldset{
+        margin: 200px ;
+      }
+      legend{
+        text-align: center;
+      }
+      /* select option[value=""][disabled] {
+	        display: none;
+        } */
+        /* select를 사용할때 메뉴선택 내용이 보이지 않게 끔 하는 코드 */
+    </style>
+  </head>
+  <body>
+    <form action="">
+    <fieldset>
+    <legend>회원 가입</legend>
+    <input class="input" type="text" id="inputid" placeholder="아이디">
+    <br><br>
+    <input class="input" type="password" id="pass" placeholder="패스워드">
+    <br><br>
+
+    <br><br>
+    <select class="input" id="" name="">
+        <option value="" disabled selected="true">직업을 선택하세요</option>
+        <option value="donbacksuu">돈많은백수</option>
+        <option value="zambacksuu">잠많은백수</option>
+      </select>
+    <br><br>
+    <input type="radio" id="male" name="sex" value="male">
+    <!-- name으로 묶어야 택 1이 된다 없으면 둘다 체크 됨-->
+    <label for="male">남자</label>
+    <input type="radio" id="female" name="sex" value="female">
+    <label for="female">여자</label>
+</fieldset>
+    </form>
+  </body>
+</html>
