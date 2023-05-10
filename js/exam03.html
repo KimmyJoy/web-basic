@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<script src="jsexam03.js">
-</script>
-<body>
+  </head>
+  <script src="jsexam03.js"></script>
+  <body>
     <form>
-    <input type="text" id="inputText">
-    <button onclick="checkText()">입력</button>
-    <!-- 하단은 텍스트가 들어와야 버튼이 생겨야 한다 -->
-    <!-- <input id= "red" type="button" value="빨강" onclick="changeRedcolor()">
+      <input type="text" id="inputText" />
+      <input type="button" value="입력" onclick="checkText()" />
+      <!-- input 버튼하고 그냥 일반 button은 다름 form 안에 있으면 submit을 대체하는 거라서 자기 자신을 리로드 하는 느낌이라 날아가 버린다-->
+      <!-- 하단은 텍스트가 들어와야 버튼이 생겨야 한다 -->
+      <!-- <input id= "red" type="button" value="빨강" onclick="changeRedcolor()">
     <input id= "blue" type="button" value="파랑" onclick="changeBluecolor()">
     <input id= "green" type="button" value="초록" onclick="changeGreencolor()"> -->
     </form>
-    <div id="displayText">
-    </div>
-
-</body>
+    <div id="textDisplay"></div>
+  </body>
 </html>

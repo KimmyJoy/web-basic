@@ -6,10 +6,10 @@
 // }
 
 function changehtmlLine(span) {
-    // let span = document.getElementsByClassName("content");
-    span.style.backgroundColor = '#F9DCC4';
-    span.style.borderColor = '#006D77';
-    span.style.borderStyle = 'dashed';
+  // let span = document.getElementsByClassName("content");
+  span.style.backgroundColor = "#F9DCC4";
+  span.style.borderColor = "#006D77";
+  span.style.borderStyle = "dashed";
 }
 
 // function changecssLine() {
@@ -27,15 +27,15 @@ function changehtmlLine(span) {
 // }
 
 function changebyhtmlLeave(span) {
-    span.style.backgroundColor = '#F6BD60';
-    span.style.borderStyle = 'none';
+  span.style.backgroundColor = "#F6BD60";
+  span.style.borderStyle = "none";
 }
 
 let x = null;
 function changebyClick(span) {
-    if(x !== null){
-       changebyhtmlLeave(x);
-    }
-    x = span;
-    changehtmlLine(x);
+  if (x !== null) {
+    changebyhtmlLeave(x);
+  }
+  x = span;
+  changehtmlLine(x);
 }
