@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <style>
+      .big-text {
+        font-size: xx-large;
+        text-align: center;
+      }
+      /* .blue-text {
+        color:lightpink
+      } */
+    </style>
+    <script>
+        $(function() {
+            //출력화면 숨기기
+            $('#output').css('display', 'none');
+            //클릭하면 출력화면 보이게
+            $('#input_button').click(function() {
+                //글씨 가져오기
+                let inputText = $('#input_text').val();//val은 value임
+                $('#output_text').text(inputText);
+            // 출력 화면 보이게
+                $('#output').css('display','block');
+            });
+            // 버튼 클릭 이벤트
+        });
+
+        function changeColor(colorCode, colorText){
+            //색 변경
+            $('#output_text').css('color', colorCode);
+            //색깔 변경 알림
+            alert(`${colorText}색으로 변경합니다`);
+        }
+    </script>
+  </head>
+  <body>
+    <input id="input_text" type="text">
+    <input id="input_button" type="button" value="입력" />
+
+    <div id="output">
+      <div id="output_text" class="big-text">입력한 것</div>
+      <div>
+        <input type="button" onclick="changeColor('lightpink', '분홍')" value="분홍" />
+        <input type="button" onclick="changeColor('lavender', '보라')" value="보라" />
+        <input type="button" onclick="changeColor('lightyellow', '노랑')" value="노랑" />
+      </div>
+    </div>
+  </body>
+</html>
