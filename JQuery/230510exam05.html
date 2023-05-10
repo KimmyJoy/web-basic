@@ -10,7 +10,46 @@
       crossorigin="anonymous"
     ></script>
     <title>Document</title>
-    <script></script>
+    <script>
+        function join(){
+          $('#submit-button').click(function(event) {
+    event.preventDefault();
+      const id = $('input[name="email"]').val();
+            const password = $('#pass').val();
+            const job = $('#job option:selected').val();
+            let check = 0;
+            console.log(`id: ${id}, password: ${password}`);
+
+            
+
+    if (id.match($('input[name="email"]').attr('pattern'))) {
+      alert('이메일 형식이 올바릅니다!');
+      // 여기에 폼 제출 코드 추가
+    } else {
+      alert('이메일 형식이 올바르지 않습니다!');
+    }
+  });
+
+            // 체크박스 전체 순회
+  $('input:checkbox').each(function() {
+    console.log($(this));
+
+    // 체크 여부를 확인
+    if ($(this).is(':checked')) {
+      console.log('클릭 됨');
+      check++;
+    } else {
+      console.log('클릭 안됨');
+    }
+  }); //each -> for문 대신에 뺑뺑이 돌리기 위해 사용 되는 것
+
+  if (id.length !== 0 && password.length !== 0 && job !== '-- 직업을 선택하세요 --' && check >= 3) {
+    alert('회원가입 성공');
+  } else {
+    alert('비워진 정보가 있거나 체크박스가 3개 미만입니다');
+  }
+}
+    </script>
     <style>
       @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
       .notosanskr * {
@@ -19,16 +58,29 @@
       body {
         font-family: "Noto Sans KR", sans-serif;
         margin: 0;
-        padding: 0;
+        position: relative;
       }
       .input {
         border:2px solid rgb(51, 67, 141);
       }
       fieldset{
-        margin: 200px ;
+        margin: 15% 45%;
+        position: absolute;
+        width: 200px;
+        border-color: cornflowerblue;
+        background-color: rgb(241, 240, 255);
       }
       legend{
         text-align: center;
+      }
+      select{
+        margin-inline: 30px;
+      }
+      .input_button{
+        font-weight: bold;
+        color: aliceblue;
+        background-color: mediumslateblue;
+        border: 2px mediumslateblue solid;
       }
       /* select option[value=""][disabled] {
 	        display: none;
@@ -37,26 +89,37 @@
     </style>
   </head>
   <body>
-    <form action="">
+    <form action="../html/target.html">
     <fieldset>
     <legend>회원 가입</legend>
-    <input class="input" type="text" id="inputid" placeholder="아이디">
+    <input class="input" type="email" id="inputid" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="아이디">
     <br><br>
     <input class="input" type="password" id="pass" placeholder="패스워드">
     <br><br>
-
+    &nbsp;&nbsp;&nbsp;
+    <input type="radio" id="male" name="sex" value="남자">
+    <!-- name으로 묶어야 택 1이 된다 없으면 둘다 체크 됨-->
+    <label for="남자">남자</label>
+    &nbsp;&nbsp;&nbsp;
+    <input type="radio" id="female" name="sex" value="여자">
+    <label for="여자">여자</label>
     <br><br>
-    <select class="input" id="" name="">
-        <option value="" disabled selected="true">직업을 선택하세요</option>
+    <select class="input" id="job" name="">
+        <option value="" disabled selected="true">-- 직업을 선택하세요 --</option>
         <option value="donbacksuu">돈많은백수</option>
         <option value="zambacksuu">잠많은백수</option>
       </select>
     <br><br>
-    <input type="radio" id="male" name="sex" value="male">
-    <!-- name으로 묶어야 택 1이 된다 없으면 둘다 체크 됨-->
-    <label for="male">남자</label>
-    <input type="radio" id="female" name="sex" value="female">
-    <label for="female">여자</label>
+    <label><input class="checkb" type="checkbox" name="hobby" value="개발">개발</label>
+    <label><input class="checkb" type="checkbox" name="hobby" value="게임">게임</label>
+    <label><input class="checkb" type="checkbox" name="hobby" value="낚시">낚시</label>
+    <br>
+    <label><input class="checkb" type="checkbox" name="hobby" value="독서">독서</label>
+    <label><input class="checkb" type="checkbox" name="hobby" value="노래">노래</label>
+    <label><input class="checkb" type="checkbox" name="hobby" value="유튜브">유튜브</label>
+    <br><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="input_button" id="submit-button" type="button">회원가입</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="input_button" type="reset" value="취소" />
 </fieldset>
     </form>
   </body>
