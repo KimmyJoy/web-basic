@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <script>
+        function join(){
+            const id = $('#id').val();
+            const password = $('#pass').val();
+            console.log(`id: ${id}, password: ${password}`);
+
+            // //input 이면서 타입이 text 놈들을 찾을때의 표현
+            // console.log($('input:text'));
+
+            // input 태그이면서 type=text name이 id2인 놈들
+            // console.log($('input:text[name=id2]'));
+
+            // console.log($('body>form>input[type=text]:nth-child(2)'));
+
+            //체크박스 전체 순회
+            $('input:checkbox').each(function(){ 
+                console.log($(this));
+
+                //체크 여부를 확인
+               if ($(this).is(':checked') === true) {
+                   console.log('클릭 됨');
+            } else {
+                   console.log('클릭 안됨');
+               }
+            });//each -> for문 대신에 뺑뺑이 돌리기 위해 사용 되는 것
+
+
+        //    if ($('input:checkbox').is(':checkbox') === true){
+
+        //     }
+        //     //is 뒷부분이 셀렉터임 :을 같이 넣어줘야만 작동이 된다
+
+        }
+    </script>
+</head>
+<body>
+    <form action="">
+        <input type="text" name="id" id="id" placeholder="id">
+        <input type="text" name="id2" id="id2" placeholder="id">
+        <input type="text" name="id3" id="id3" placeholder="id">
+        <input type="checkbox" name="" id="" checked>
+        <input type="checkbox" name="" id="">
+
+        <input type="password" name="pass" id="pass">
+
+        <input type="button" value="등록" onclick="join()">
+    </form>
+</body>
+</html>

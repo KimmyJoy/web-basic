@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+          let span = $("content").val();
+          span.style.backgroundColor = "#F9DCC4";
+          span.style.borderColor = "#006D77";
+          span.style.borderStyle = "dashed";
+        
+        function changebyhtmlLeave(span) {
+          span.style.backgroundColor = "#F6BD60";
+          span.style.borderStyle = "none";
+        }
+        let x = null;
+        function changebyClick(span) {
+          if (x !== null) {
+            changebyhtmlLeave(x);
+          }
+          x = span;
+          changehtmlLine(x);
+        }
+    })
+        </script>
+<style>
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style:normal;
+}
+body{
+    background-color: #F7EDE2
+}
+#html {
+    font-family: 'Pretendard-Regular';
+    font-size: x-large;
+}
+.content{
+    display: inline-block;
+    background-color: #F6BD60;
+    border-radius: 9%;
+    box-sizing: border-box;
+    margin: 40px 1px;
+    text-align: center;
+    width: 7em;
+    line-height: 3em;
+    color: #006D77;
+}
+</style>
+</head>
+<body>
+    <div id="html">
+        <span class="content" onclick="changebyClick(this)" id="texthtml">html</span>
+        <span class="content" onclick="changebyClick(this)" id="textcss">css</span>
+        <span class="content" onclick="changebyClick(this)" id="textjavascript">javascript</span>
+    </div>
+</body>
+</html>

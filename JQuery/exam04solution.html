@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        span {
+            background-color: gray;
+            color: white;
+        }
+
+    </style>
+    <script>
+        function select(element){
+            //모든 클래스 삭제
+            $('span').removeClass();//1.커서 올렸을때 다 지우고
+
+            //누른 애만 클래스 추가
+            $(element).addClass('selected');//2.클래스를 add한다
+            // $(element).attr('class','selected');//remove 클래스가 있음...........
+            //에러 없는 코드 = 변수 없는 코드 이런 코드가 좋음
+            //보기 좋고, 수정하기 좋은 코드들이 제일 좋음
+        }
+    </script>
+</head>
+<body>
+    <span class="selected" onclick="select(this)">html</span>
+    <span onclick="select(this)">css</span>
+    <span onclick="select(this)">javascript</span>
+    <!-- 3개를 가져오는 방법 -->
+</body>
+</html>

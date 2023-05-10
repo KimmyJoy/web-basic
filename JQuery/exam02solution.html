@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+   
+    <title>Document</title>
+    <script>
+        //텍스트 입력한 것을 등록누르면 되는 것
+        function addNews() { //이게 뭐냐
+            const news = $('#input_text').val();//input_text에 있는 값
+            
+            
+            if (news === null || news.length === 0){
+                return;
+            }
+
+            $('#box').append(`<li>${news}</li>`)// << +안쓰고 연결하는 방법
+            $('#input_text').val('');//인자를 얻어오면 set이 됨?
+        }
+    </script>
+    <style>
+        #box {
+            padding: 10px;
+            background-color:rgb(207, 237, 255);
+            width:fit-content
+        }
+        #input_text{
+            border
+        }
+        li {
+      padding: 10px;
+      margin: 10px;
+      background-color: rgb(221, 208, 255);
+      color:rgb(132, 155, 255);
+      list-style: none;
+      width: 200px;
+        }
+    @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+    .notosanskr * { 
+    font-family: 'Noto Sans KR', sans-serif;
+    }
+    body{
+        font-weight: bold;
+    }
+    </style>
+    
+</head>
+<body>
+    <ul id="box">
+        <!-- stylesheet로 재정의 되기 때문에 ul 그대로 써도 됨 -->
+        <li>박지성 어쩌구</li>
+        <li>안정환 어쩌구</li>
+        <li>이영표 KBS 어쩌구</li>
+    </ul>
+    <input id="input_text" type="text">
+    <input type="button" onclick="addNews()" value="등록하기">
+</body>
+</html>
