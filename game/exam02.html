@@ -16,6 +16,8 @@
         width: 500px;
         height: 300px;
         border: 2px black solid;
+        background-image: url(images/field.jpg);
+        background-size: cover;
       }
 
       #scarpy2 {
@@ -23,16 +25,39 @@
         left: 100px;
         bottom: 5px;
         width: 80px;
-        border: 2px pink solid;
+        border: 2px pink hidden;
       }
 
       #enemy {
         position: absolute;
-        width: 60px;
+        width: 50px;
         transform: rotate(16deg);
-        right: 0px;
+        right: -50px;
         bottom: 30px;
-        z-index: -1;
+
+        #score {
+            float: right;
+        }
+
+        .sliding-background {
+            z-index: -100;
+      position: absolute;
+            background-image: url(images/field.jpg);
+            background-size: contain;
+            animation: slide 5s linear infinite;
+        }
+
+
+        @keyframes slide {
+      from {
+        transform: translate(0, 0);
+      }
+
+      to {
+        transform: translate(-500px, 0);
+      }
+    }
+
       }
     </style>
     <script>
@@ -47,17 +72,32 @@
       $(function () {
         const scarpy2 = $("#scarpy2");
         const enemy = $("#enemy");
+        
         //점프 중인지 저장하는 변수
         let isJumping = false;
-
+        let score = 0;
         gameStart();
 
         function gameStart() {
+        // $('#gameover_screen').hide();
           setKeyboardEvent();
           enemyStart(); //난이도 조절을 위해서는 random함수를 써야함
 
           checkGameOver();
         }
+
+
+        function isColliding(el1, el2) {
+        const rect1 = el1.getBoundingClientRect();
+        const rect2 = el2.getBoundingClientRect();
+
+        return !(
+          rect1.bottom < rect2.top ||
+          rect1.top > rect2.bottom ||
+          rect1.right < rect2.left ||
+          rect1.left > rect2.right
+        );
+      }
 
         function checkGameOver() {
           setInterval(function () {
@@ -80,7 +120,10 @@
             // , enemyBottom: ${enemyBottom}
             // , isGameOver: ${isGameOver}`);
 
-            if (isGameOver) {
+            // if (isGameOver) {
+            // scarpy2.stop();
+            // enemy.stop();
+            if (isColliding(scarpy2[0], enemy[0])) {
             scarpy2.stop();
             enemy.stop();
           }
@@ -89,6 +132,15 @@
           }, 1000 / 60);
         }
 
+
+//         // 재시작 버튼 클릭 이벤트 핸들러
+//   $('#gameover_screen input[type="button"]').click(function () {
+//     $('#gameover_screen').hide(); // 게임 오버 화면 숨김
+//     gameStart(); // 게임 재시작
+//   });
+
+
+        //충돌체크하는 함수
         function getRandomNumber(min, max) {
           return Math.floor(Math.random() * (max - min + 1)) + min;
         }
@@ -97,11 +149,21 @@
           // 속도 조절
           const speed = getRandomNumber(1000, 3000);
           //적이 오른쪽에서 왼쪽으로 이동
-          enemy.animate({ right: "550px" }, 1500, "linear", function () {
+          enemy.animate({ right: "550px" }, 1500, "linear"
+          , function () {
+            //점수 올리자
+            score += 100;
+            updateScore(score);
+
+            //적 리셋
             enemy.css("right", "-70px");
             enemyStart();
             // 재귀함수, 인터벌 등 방법으 여러가지 있음
           }); //맨뒤가 콜백임
+        }
+
+        function updateScore(score) {
+          $("#score").text(score);
         }
 
         function jumP() {
@@ -112,7 +174,7 @@
               isJumping = false;
             });
         }
-
+        // 키보드 이벤트 정의
         function setKeyboardEvent() {
           $("html").keydown(function (e) {
             switch (e.key) {
@@ -138,6 +200,13 @@
     <div id="container">
       <img id="scarpy2" src="images/scarpy2.png" alt="" />
       <img id="enemy" src="images/heart.png" alt="" />
+      <div id="gameover_screen">
+        Game Over
+        <input type="button" class="restart" value="재시작">
+        </div>
+        <div id="score">0</div>
     </div>
+    
+
   </body>
 </html>
