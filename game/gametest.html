@@ -9,56 +9,56 @@
       integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
       crossorigin="anonymous"
     ></script>
-    <title>Document</title>
+    <title>Jumpingcat</title>
     <style>
       #container {
         position: absolute;
         width: 500px;
         height: 300px;
         border: 2px black solid;
+        /* background-image: url(images/field.jpg); */
+        overflow: hidden;
         background-image: url(images/field.jpg);
-        background-size: cover;
+        background-size: contain;
       }
-
       #scarpy2 {
         position: absolute;
         left: 100px;
-        bottom: 5px;
+        bottom: 10px;
         width: 80px;
         border: 2px pink hidden;
+        
       }
-
       #enemy {
         position: absolute;
         width: 50px;
         transform: rotate(16deg);
         right: -50px;
-        bottom: 30px;
-
-        #score {
-            float: right;
+        bottom: 40px;
+      }
+      #score {
+        float: right;
+      }
+      /* .sliding-background {
+        z-index: -100;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url(images/field.jpg);
+        background-size: cover;
+        background-repeat: repeat-x;
+        
+        animation: slide 10s linear infinite;
+      }
+      @keyframes slide {
+        from {
+          transform: translate(0, 0);
         }
-
-        .sliding-background {
-            z-index: -100;
-      position: absolute;
-            background-image: url(images/field.jpg);
-            background-size: contain;
-            animation: slide 5s linear infinite;
+        to {
+          transform: translate(-500px, 0);
         }
+      } */
 
-
-        @keyframes slide {
-      from {
-        transform: translate(0, 0);
-      }
-
-      to {
-        transform: translate(-500px, 0);
-      }
-    }
-
-      }
     </style>
     <script>
       //난이도 조절을 위한 상수 선언
@@ -72,40 +72,49 @@
       $(function () {
         const scarpy2 = $("#scarpy2");
         const enemy = $("#enemy");
-        
+
         //점프 중인지 저장하는 변수
         let isJumping = false;
         let score = 0;
         gameStart();
 
         function gameStart() {
-        // $('#gameover_screen').hide();
+          // $('#gameover_screen').hide();
           setKeyboardEvent();
           enemyStart(); //난이도 조절을 위해서는 random함수를 써야함
-
+          moveBackground()
           checkGameOver();
         }
 
+        function moveBackground() {
+                let position = 0;
+                setInterval(function () {
+                    $("#container").css("background-position", position-- + "px");
+                }, 10);
+            }
+
 
         function isColliding(el1, el2) {
-        const rect1 = el1.getBoundingClientRect();
-        const rect2 = el2.getBoundingClientRect();
+          const rect1 = el1.getBoundingClientRect();
+          const rect2 = el2.getBoundingClientRect();
 
-        return !(
-          rect1.bottom < rect2.top ||
-          rect1.top > rect2.bottom ||
-          rect1.right < rect2.left ||
-          rect1.left > rect2.right
-        );
-      }
+          return !(
+            rect1.bottom < rect2.top ||
+            rect1.top > rect2.bottom ||
+            rect1.right < rect2.left ||
+            rect1.left > rect2.right
+          );
+        }
 
         function checkGameOver() {
           setInterval(function () {
-            const scarpy2Left = Number(scarpy2.css('left').replace('px', ''));
-          const scarpy2Right = scarpy2Left + 50;
-          const scarpy2Bottom = Number(scarpy2.css('bottom').replace('px', ''));
+            const scarpy2Left = Number(scarpy2.css("left").replace("px", ""));
+            const scarpy2Right = scarpy2Left + 50;
+            const scarpy2Bottom = Number(
+              scarpy2.css("bottom").replace("px", "")
+            );
             //괄호 단축키: 텍스트 더블클릭한 상태로 괄호하면 됨...자동으로 닫힘
-            const enemyLeft = Number(enemy.css("left").replace("px", ""));//게임수학의 기초...
+            const enemyLeft = Number(enemy.css("left").replace("px", "")); //게임수학의 기초...
             const enemyRight = enemyLeft + 20;
             const enemyTop = 20;
 
@@ -124,21 +133,16 @@
             // scarpy2.stop();
             // enemy.stop();
             if (isColliding(scarpy2[0], enemy[0])) {
-            scarpy2.stop();
-            enemy.stop();
-          }
-
-
+              scarpy2.stop();
+              enemy.stop();
+            }
           }, 1000 / 60);
         }
-
-
-//         // 재시작 버튼 클릭 이벤트 핸들러
-//   $('#gameover_screen input[type="button"]').click(function () {
-//     $('#gameover_screen').hide(); // 게임 오버 화면 숨김
-//     gameStart(); // 게임 재시작
-//   });
-
+        //         // 재시작 버튼 클릭 이벤트 핸들러
+        //   $('#gameover_screen input[type="button"]').click(function () {
+        //     $('#gameover_screen').hide(); // 게임 오버 화면 숨김
+        //     gameStart(); // 게임 재시작
+        //   });
 
         //충돌체크하는 함수
         function getRandomNumber(min, max) {
@@ -149,8 +153,7 @@
           // 속도 조절
           const speed = getRandomNumber(1000, 3000);
           //적이 오른쪽에서 왼쪽으로 이동
-          enemy.animate({ right: "550px" }, 1500, "linear"
-          , function () {
+          enemy.animate({ right: "550px" }, 1500, "linear", function () {
             //점수 올리자
             score += 100;
             updateScore(score);
@@ -198,13 +201,14 @@
   </head>
   <body>
     <div id="container">
-      <img id="scarpy2" src="images/scarpy2.png" alt="" />
+      <div class="sliding-background"></div>
+      <img id="scarpy2" src="images/catwalk.webp" alt="" />
       <img id="enemy" src="images/heart.png" alt="" />
       <div id="gameover_screen">
         Game Over
-        <input type="button" class="restart" value="재시작">
-        </div>
-        <div id="score">0</div>
+        <input type="button" class="restart" value="재시작" />
+      </div>
+      <div id="score">0</div>
     </div>
   </body>
 </html>
