@@ -22,8 +22,8 @@
         position: absolute;
         left: 100px;
         bottom: 5px;
-        width: 100px;
-        border: 2px pink hidden;
+        width: 80px;
+        border: 2px pink solid;
       }
 
       #enemy {
@@ -36,6 +36,13 @@
       }
     </style>
     <script>
+      //난이도 조절을 위한 상수 선언
+      const ENEMY_SPEED_MIN_EASY = 1500;
+      const ENEMY_SPEED_MAX_EASY = 5000;
+      const ENEMY_SPEED_MIN_HARD = 1000;
+      const ENEMY_SPEED_MAX_HARD = 3000;
+      //바닥과 겹치는 부분이 있는지는 계속 체크를 해야함
+
       //반복에는 for문을 쓰면 안됨
       $(function () {
         const scarpy2 = $("#scarpy2");
@@ -47,13 +54,53 @@
 
         function gameStart() {
           setKeyboardEvent();
-          enemyStart();
+          enemyStart(); //난이도 조절을 위해서는 random함수를 써야함
+
+          checkGameOver();
+        }
+
+        function checkGameOver() {
+          setInterval(function () {
+            const scarpy2Left = Number(scarpy2.css('left').replace('px', ''));
+          const scarpy2Right = scarpy2Left + 50;
+          const scarpy2Bottom = Number(scarpy2.css('bottom').replace('px', ''));
+            //괄호 단축키: 텍스트 더블클릭한 상태로 괄호하면 됨...자동으로 닫힘
+            const enemyLeft = Number(enemy.css("left").replace("px", ""));//게임수학의 기초...
+            const enemyRight = enemyLeft + 20;
+            const enemyTop = 20;
+
+            const isGameOver =
+              scarpy2Right > enemyLeft &&
+              scarpy2Bottom < enemyTop &&
+              scarpy2Left < enemyLeft;
+
+            // console.log(`scarpy2Right: ${scarpy2Right}
+            // ,scarpy2Bottom: ${scarpy2Bottom}
+            // , enemyRight: ${enemyRight}
+            // , enemyBottom: ${enemyBottom}
+            // , isGameOver: ${isGameOver}`);
+
+            if (isGameOver) {
+            scarpy2.stop();
+            enemy.stop();
+          }
+
+
+          }, 1000 / 60);
+        }
+
+        function getRandomNumber(min, max) {
+          return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
         function enemyStart() {
+          // 속도 조절
+          const speed = getRandomNumber(1000, 3000);
           //적이 오른쪽에서 왼쪽으로 이동
-          enemy.animate({ right: "550px" }, 1500, "linear", function() {
+          enemy.animate({ right: "550px" }, 1500, "linear", function () {
             enemy.css("right", "-70px");
+            enemyStart();
+            // 재귀함수, 인터벌 등 방법으 여러가지 있음
           }); //맨뒤가 콜백임
         }
 
@@ -89,7 +136,7 @@
   </head>
   <body>
     <div id="container">
-      <img id="scarpy2" src="images/scarpy2.png" width="100px" alt="" />
+      <img id="scarpy2" src="images/scarpy2.png" alt="" />
       <img id="enemy" src="images/heart.png" alt="" />
     </div>
   </body>
