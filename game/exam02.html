@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.4.js"
+      integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+    <style>
+      #container {
+        position: absolute;
+        width: 500px;
+        height: 300px;
+        border: 2px black solid;
+      }
+
+      #scarpy2 {
+        position: absolute;
+        left: 100px;
+        bottom: 5px;
+        width: 100px;
+        border: 2px pink hidden;
+      }
+
+      #enemy {
+        position: absolute;
+        width: 60px;
+        transform: rotate(16deg);
+        right: 0px;
+        bottom: 30px;
+        z-index: -1;
+      }
+    </style>
+    <script>
+      //반복에는 for문을 쓰면 안됨
+      $(function () {
+        const scarpy2 = $("#scarpy2");
+        const enemy = $("#enemy");
+        //점프 중인지 저장하는 변수
+        let isJumping = false;
+
+        gameStart();
+
+        function gameStart() {
+          setKeyboardEvent();
+          enemyStart();
+        }
+
+        function enemyStart() {
+          //적이 오른쪽에서 왼쪽으로 이동
+          enemy.animate({ right: "550px" }, 1500, "linear", function() {
+            enemy.css("right", "-70px");
+          }); //맨뒤가 콜백임
+        }
+
+        function jumP() {
+          isJumping = true;
+          scarpy2
+            .animate({ bottom: "+=100px" })
+            .animate({ bottom: "-=100px" }, function () {
+              isJumping = false;
+            });
+        }
+
+        function setKeyboardEvent() {
+          $("html").keydown(function (e) {
+            switch (e.key) {
+              case " ":
+                if (!isJumping) {
+                  jumP();
+                }
+                break;
+              //     case "ArrowRight":
+              //   moveRight();
+              //   break;
+              //   case "ArrowLeft":
+              //       moveLeft();
+              //       break;
+            }
+            // console.log(e.key);
+          });
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <img id="scarpy2" src="images/scarpy2.png" width="100px" alt="" />
+      <img id="enemy" src="images/heart.png" alt="" />
+    </div>
+  </body>
+</html>
