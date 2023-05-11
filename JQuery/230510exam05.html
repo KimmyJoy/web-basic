@@ -13,25 +13,27 @@
     <script>
         function join(){
           $('#submit-button').click(function(event) {
-    event.preventDefault();
-      const id = $('input[name="email"]').val();
+        event.preventDefault();//submit 시 초기화 방지
+            const id = $('input[name="email"]').val();
             const password = $('#pass').val();
             const job = $('#job option:selected').val();
             let check = 0;
             console.log(`id: ${id}, password: ${password}`);
-
+            //switch를 쓰려면 default를 꼭 넣는 것을 추천....
             
-
+            // excute()얘도 사용 가능함
     if (id.match($('input[name="email"]').attr('pattern'))) {
       alert('이메일 형식이 올바릅니다!');
       // 여기에 폼 제출 코드 추가
     } else {
       alert('이메일 형식이 올바르지 않습니다!');
     }
+
+    
   });
 
-            // 체크박스 전체 순회
-  $('input:checkbox').each(function() {
+    // 체크박스 전체 순회
+    $('input:checkbox').each(function() {
     console.log($(this));
 
     // 체크 여부를 확인
@@ -62,6 +64,7 @@
       }
       .input {
         border:2px solid rgb(51, 67, 141);
+        margin: 1px 10px 0px;
       }
       fieldset{
         margin: 15% 45%;
@@ -118,7 +121,7 @@
     <label><input class="checkb" type="checkbox" name="hobby" value="노래">노래</label>
     <label><input class="checkb" type="checkbox" name="hobby" value="유튜브">유튜브</label>
     <br><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="input_button" id="submit-button" type="button">회원가입</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="input_button" id="submit-button" type="submit" value="회원가입">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="input_button" type="reset" value="취소" />
 </fieldset>
     </form>
