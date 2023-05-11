@@ -11,6 +11,7 @@
     ></script>
     <title>Document</title>
     <script>
+      //id.match($('input[name="email"]').attr('pattern') 이런 복잡한 코드들 같은 것은 const 변수로 미리 정의하여 사용하면 깔끔하고 가독성도 좋아진다 
         function join(){
           $('#submit-button').click(function(event) {
         event.preventDefault();//submit 시 초기화 방지
@@ -29,7 +30,7 @@
       alert('이메일 형식이 올바르지 않습니다!');
     }
 
-    
+    //체크하는 태그나 코드들은 대체로 접두 is 나 has로 bloolean 명을 확인하는 편
   });
 
     // 체크박스 전체 순회
@@ -37,7 +38,7 @@
     console.log($(this));
 
     // 체크 여부를 확인
-    if ($(this).is(':checked')) {
+    if ($(this).is(':checked')) {//이부분은 lingth 확인이 가능함 다만 숫자를 기재하는 방식은 체크박스항목 추가를 힘들게 하게 하되므로..checkbox의 length로 처리하는 것이 깔끔하고 더 확장성 있다
       console.log('클릭 됨');
       check++;
     } else {
@@ -52,44 +53,7 @@
   }
 }
     </script>
-    <style>
-      @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
-      .notosanskr * {
-        font-family: "Noto Sans KR", sans-serif;
-      }
-      body {
-        font-family: "Noto Sans KR", sans-serif;
-        margin: 0;
-        position: relative;
-      }
-      .input {
-        border:2px solid rgb(51, 67, 141);
-        margin: 1px 10px 0px;
-      }
-      fieldset{
-        margin: 15% 45%;
-        position: absolute;
-        width: 200px;
-        border-color: cornflowerblue;
-        background-color: rgb(241, 240, 255);
-      }
-      legend{
-        text-align: center;
-      }
-      select{
-        margin-inline: 30px;
-      }
-      .input_button{
-        font-weight: bold;
-        color: aliceblue;
-        background-color: mediumslateblue;
-        border: 2px mediumslateblue solid;
-      }
-      /* select option[value=""][disabled] {
-	        display: none;
-        } */
-        /* select를 사용할때 메뉴선택 내용이 보이지 않게 끔 하는 코드 */
-    </style>
+
   </head>
   <body>
     <form action="../html/target.html">

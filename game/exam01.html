@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.4.js"
+      integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+    <style>
+      #container {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border: 2px black solid;
+      }
+
+      #scarpy2 {
+        position: absolute;
+        left: 100px;
+        top: 100px;
+        width: 100px;
+        border: 2px pink solid;
+      }
+    </style>
+    <script>
+      $(function() {
+        const scarpy2= $("#scarpy2");
+        let count= 3;
+        gameStart();
+
+        // 키보드 이벤트 정의
+        $("html").keydown(function (e) {
+          switch (e.key) {
+              case "ArrowRight":
+                  moveRight();
+                  break;
+                  case "ArrowLeft":
+                      moveLeft();
+                      break;
+                    }
+                    console.log(e.key);
+                });
+
+                function gameStart() {
+                    // 3초 있다가 나오기
+                    setTimeout(function() {
+                        scarpy2.show();
+                    }, 3000);
+                }
+
+                function countDown() {
+                    let timer= setInterval(function () {
+                        console.log(count);
+                        count--;
+                        if (count < 0) {
+                            // 인터벌 취소
+                            clearInterval(timer);
+                        }
+                    }, 1000);
+                }
+
+        function moveRight() {//const 값이라서 $function() 내부에 집어넣어야함
+            //오른쪽 벽에 닿았는지
+            const scarpy2RightMargin = $('#scarpy2').css('right').replace('px','');
+            const scarpy2LeftMargin = $('#scarpy2').css('left').replace('px','');
+
+            if(scarpy2RightMargin > 0){
+            scarpy2.animate({ left: '+=10px'}, 0);//뒤에있는 것이 애니메이션 인자
+          }
+
+            if (scarpy2RightMargin < 0) {
+                scarpy2.animate({ left: '200px' }, 0);
+            }
+
+          };
+
+        function moveLeft() {
+            scarpy2.animate({left: '-=10px'}, 0);
+            if (scarpy2.css('left').replace('px', '') < 0) {
+                scarpy2.animate({ left: '0px' }, 0);
+            }
+        };
+
+
+    });  
+    </script>
+  </head>
+
+  <body>
+    <div id="container">
+      <img id="scarpy2" src="images/scarpy2.png" width="100px" alt="" />
+    </div>
+  </body>
+</html>
