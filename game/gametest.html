@@ -11,6 +11,17 @@
     ></script>
     <title>Jumpingcat</title>
     <style>
+    @font-face {
+    font-family: 'Sam3KRFont';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Sam3KRFont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+        font-family: "Sam3KRFont";
+        font-size: large;  
+}
       #container {
         position: absolute;
         width: 500px;
@@ -28,29 +39,29 @@
         border: 2px pink solid;
       }
       #cat {
-  width: 100%;
-}
+        width: 100%;
+      }
 
-#heatbox {
-  position: absolute;
-  left: 18px;
-  bottom: 37px;
-  width: 55px;
-  height: 5px;
-  border: 3px red solid;
-}
+      #heatbox {
+        position: absolute;
+        left: 18px;
+        bottom: 37px;
+        width: 55px;
+        height: 5px;
+        border: 3px red solid;
+      }
 
-#heatbox2 {
-  position: absolute;
-  left: 15px;
-  bottom: 15px;
-  width: 45px;
-  height: 25px;
-  background-color: red;
-  border: 3px red solid;
-  border-radius: 20%;
-}
-/* 
+      #heatbox2 {
+        position: absolute;
+        left: 15px;
+        bottom: 15px;
+        width: 45px;
+        height: 25px;
+        background-color: red;
+        border: 3px red solid;
+        border-radius: 20%;
+      }
+      /* 
       #heatbox {
         position: absolute;
         left: 121px;
@@ -144,28 +155,31 @@
           );
         }
 
-
         function checkGameOver() {
-  setInterval(function () {
-    const catLeft = Number(cat.css("left").replace("px", ""));
-    const catRight = catLeft + 50;
-    const catBottom = Number(cat.css("bottom").replace("px", ""));
-    const enemyLeft = Number(enemy.css("left").replace("px", ""));
-    const enemyRight = enemyLeft + 20;
-    const enemyTop = 20;
+          setInterval(function () {
+            const catLeft = Number(cat.css("left").replace("px", ""));
+            const catRight = catLeft + 50;
+            const catBottom = Number(cat.css("bottom").replace("px", ""));
+            const enemyLeft = Number(enemy.css("left").replace("px", ""));
+            const enemyRight = enemyLeft + 20;
+            const enemyTop = 20;
 
-    const isGameOver =
-      catRight > enemyLeft &&
-      catBottom < enemyTop &&
-      catLeft < enemyLeft;
+            const isGameOver =
+              catRight > enemyLeft &&
+              catBottom < enemyTop &&
+              catLeft < enemyLeft;
 
-    if (isColliding(enemy[0], heatbox[0]) || isColliding(enemy[0], heatbox2[0]) || isGameOver) {
-      clearInterval(intervalId);
-      clearInterval(enemyIntervalId);
-      $("#gameover_screen").show();
-    }
-  }, 1000);
-}
+            if (
+              isColliding(enemy[0], heatbox[0]) ||
+              isColliding(enemy[0], heatbox2[0]) ||
+              isGameOver
+            ) {
+              clearInterval(intervalId);
+              clearInterval(enemyIntervalId);
+              $("#gameover_screen").show();
+            }
+          }, 1000);
+        }
         //         // 재시작 버튼 클릭 이벤트 핸들러
         //   $('#gameover_screen input[type="button"]').click(function () {
         //     $('#gameover_screen').hide(); // 게임 오버 화면 숨김
@@ -186,16 +200,16 @@
             score += 100;
             updateScore(score);
             function startScoreUpdate() {
-          setInterval(function () {
-            score++;
-            $("#score").text(`Score: ${score}`);
-            if (score % 10 === 0) {
-              enemySpeed = Math.max(enemySpeed - 50, ENEMY_SPEED_MIN_HARD);
-              clearInterval(enemyIntervalId);
-              startEnemyMove();
+              setInterval(function () {
+                score++;
+                $("#score").text(`Score: ${score}`);
+                if (score % 10 === 0) {
+                  enemySpeed = Math.max(enemySpeed - 50, ENEMY_SPEED_MIN_HARD);
+                  clearInterval(enemyIntervalId);
+                  startEnemyMove();
+                }
+              }, 1000);
             }
-          }, 1000);
-        }
             //적 리셋
             enemy.css("right", "-70px");
             enemyStart();
@@ -233,11 +247,11 @@
   <body>
     <div id="container">
       <div class="sliding-background"></div>
-      <div id="cat-container"> 
-      <img id="cat" src="images/catwalk.webp" alt="" />
-      <div id="heatbox"></div>
-      <div id="heatbox2"></div>
-    </div>
+      <div id="cat-container">
+        <img id="cat" src="images/catwalk.webp" alt="" />
+        <div id="heatbox"></div>
+        <div id="heatbox2"></div>
+      </div>
       <img id="enemy" src="images/drug.gif" alt="" />
       <div id="gameover_screen">
         Game Over
