@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Black Cat</title>
+    <style>
+        #cat {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: walk 1s infinite;
+        }
+
+        @keyframes walk {
+            0% {
+                transform: translate(-50%, -50%) scaleX(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scaleX(-1);
+            }
+            100% {
+                transform: translate(-50%, -50%) scaleX(1);
+            }
+        }
+
+        #jump {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: jump 1s infinite;
+        }
+
+        @keyframes jump {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            50% {
+                transform: translate(-50%, -50%) rotate(180deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <img id="cat" src="https://i.pinimg.com/236x/5d/5d/5d/5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5--black-cat-art-black-cats.jpg" width="100" height="100">
+    <img id="jump" src="https://i.pinimg.com/236x/5d/5d/5d/5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5--black-cat-art-black-cats.jpg" width="100" height="100">
+</body>
+</html>

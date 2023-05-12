@@ -16,49 +16,69 @@
         width: 500px;
         height: 300px;
         border: 2px black solid;
-        /* background-image: url(images/field.jpg); */
         overflow: hidden;
         background-image: url(images/field.jpg);
         background-size: contain;
       }
-      #scarpy2 {
+      #cat-container {
         position: absolute;
         left: 100px;
         bottom: 10px;
-        width: 80px;
-        border: 2px pink hidden;
-        
+        width: 85px;
+        border: 2px pink solid;
       }
+      #cat {
+  width: 100%;
+}
+
+#heatbox {
+  position: absolute;
+  left: 18px;
+  bottom: 37px;
+  width: 55px;
+  height: 5px;
+  border: 3px red solid;
+}
+
+#heatbox2 {
+  position: absolute;
+  left: 15px;
+  bottom: 15px;
+  width: 45px;
+  height: 25px;
+  background-color: red;
+  border: 3px red solid;
+  border-radius: 20%;
+}
+/* 
+      #heatbox {
+        position: absolute;
+        left: 121px;
+        bottom: 48px;
+        width: 55px;
+        border: 3px red solid;
+        border-radius: 20%;
+      }
+      #heatbox2 {
+        position: absolute;
+        left: 120px;
+        bottom: 25px;
+        width: 45px;
+        height: 25px;
+        background-color: red;
+        border: 3px red solid;
+        border-radius: 20%;
+      } */
       #enemy {
         position: absolute;
         width: 50px;
-        transform: rotate(16deg);
+        transform: rotate(-20deg);
         right: -50px;
-        bottom: 40px;
+        bottom: 50px;
       }
       #score {
         float: right;
       }
-      /* .sliding-background {
-        z-index: -100;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-image: url(images/field.jpg);
-        background-size: cover;
-        background-repeat: repeat-x;
-        
-        animation: slide 10s linear infinite;
-      }
-      @keyframes slide {
-        from {
-          transform: translate(0, 0);
-        }
-        to {
-          transform: translate(-500px, 0);
-        }
-      } */
-
     </style>
     <script>
       //난이도 조절을 위한 상수 선언
@@ -67,37 +87,55 @@
       const ENEMY_SPEED_MIN_HARD = 1000;
       const ENEMY_SPEED_MAX_HARD = 3000;
       //바닥과 겹치는 부분이 있는지는 계속 체크를 해야함
-
+      //점프 중인지 저장하는 변수
+      let isJumping = false;
+      let score = 0;
+      let intervalId = null;
+      let enemyIntervalId = null;
+      let enemySpeed = ENEMY_SPEED_MIN_EASY;
       //반복에는 for문을 쓰면 안됨
       $(function () {
-        const scarpy2 = $("#scarpy2");
+        const cat = $("#cat");
         const enemy = $("#enemy");
+        const heatbox = $("#heatbox");
+        const heatbox2 = $("#heatbox2");
 
-        //점프 중인지 저장하는 변수
-        let isJumping = false;
-        let score = 0;
         gameStart();
 
         function gameStart() {
+          // 초기화
+          isJumping = false;
+          score = 0;
+          enemySpeed = ENEMY_SPEED_MIN_EASY;
+          cat.css({ bottom: 10 });
+          enemy.css({ right: -50 });
           // $('#gameover_screen').hide();
           setKeyboardEvent();
           enemyStart(); //난이도 조절을 위해서는 random함수를 써야함
-          moveBackground()
+          startBackgroundAnimation();
           checkGameOver();
         }
 
-        function moveBackground() {
-                let position = 0;
-                setInterval(function () {
-                    $("#container").css("background-position", position-- + "px");
-                }, 10);
-            }
-
+        function startBackgroundAnimation() {
+          let position = 0;
+          setInterval(function () {
+            $("#container").css("background-position", position-- + "px");
+          }, 10);
+        }
 
         function isColliding(el1, el2) {
-          const rect1 = el1.getBoundingClientRect();
-          const rect2 = el2.getBoundingClientRect();
-
+          const rect1 = {
+            bottom: el1.offset().top + el1.outerHeight(),
+            top: el1.offset().top,
+            left: el1.offset().left,
+            right: el1.offset().left + el1.outerWidth(),
+          };
+          const rect2 = {
+            bottom: el2.offset().top + el2.outerHeight(),
+            top: el2.offset().top,
+            left: el2.offset().left,
+            right: el2.offset().left + el2.outerWidth(),
+          };
           return !(
             rect1.bottom < rect2.top ||
             rect1.top > rect2.bottom ||
@@ -106,38 +144,28 @@
           );
         }
 
+
         function checkGameOver() {
-          setInterval(function () {
-            const scarpy2Left = Number(scarpy2.css("left").replace("px", ""));
-            const scarpy2Right = scarpy2Left + 50;
-            const scarpy2Bottom = Number(
-              scarpy2.css("bottom").replace("px", "")
-            );
-            //괄호 단축키: 텍스트 더블클릭한 상태로 괄호하면 됨...자동으로 닫힘
-            const enemyLeft = Number(enemy.css("left").replace("px", "")); //게임수학의 기초...
-            const enemyRight = enemyLeft + 20;
-            const enemyTop = 20;
+  setInterval(function () {
+    const catLeft = Number(cat.css("left").replace("px", ""));
+    const catRight = catLeft + 50;
+    const catBottom = Number(cat.css("bottom").replace("px", ""));
+    const enemyLeft = Number(enemy.css("left").replace("px", ""));
+    const enemyRight = enemyLeft + 20;
+    const enemyTop = 20;
 
-            const isGameOver =
-              scarpy2Right > enemyLeft &&
-              scarpy2Bottom < enemyTop &&
-              scarpy2Left < enemyLeft;
+    const isGameOver =
+      catRight > enemyLeft &&
+      catBottom < enemyTop &&
+      catLeft < enemyLeft;
 
-            // console.log(`scarpy2Right: ${scarpy2Right}
-            // ,scarpy2Bottom: ${scarpy2Bottom}
-            // , enemyRight: ${enemyRight}
-            // , enemyBottom: ${enemyBottom}
-            // , isGameOver: ${isGameOver}`);
-
-            // if (isGameOver) {
-            // scarpy2.stop();
-            // enemy.stop();
-            if (isColliding(scarpy2[0], enemy[0])) {
-              scarpy2.stop();
-              enemy.stop();
-            }
-          }, 1000 / 60);
-        }
+    if (isColliding(enemy[0], heatbox[0]) || isColliding(enemy[0], heatbox2[0]) || isGameOver) {
+      clearInterval(intervalId);
+      clearInterval(enemyIntervalId);
+      $("#gameover_screen").show();
+    }
+  }, 1000);
+}
         //         // 재시작 버튼 클릭 이벤트 핸들러
         //   $('#gameover_screen input[type="button"]').click(function () {
         //     $('#gameover_screen').hide(); // 게임 오버 화면 숨김
@@ -157,7 +185,17 @@
             //점수 올리자
             score += 100;
             updateScore(score);
-
+            function startScoreUpdate() {
+          setInterval(function () {
+            score++;
+            $("#score").text(`Score: ${score}`);
+            if (score % 10 === 0) {
+              enemySpeed = Math.max(enemySpeed - 50, ENEMY_SPEED_MIN_HARD);
+              clearInterval(enemyIntervalId);
+              startEnemyMove();
+            }
+          }, 1000);
+        }
             //적 리셋
             enemy.css("right", "-70px");
             enemyStart();
@@ -171,7 +209,7 @@
 
         function jumP() {
           isJumping = true;
-          scarpy2
+          cat
             .animate({ bottom: "+=100px" })
             .animate({ bottom: "-=100px" }, function () {
               isJumping = false;
@@ -186,14 +224,7 @@
                   jumP();
                 }
                 break;
-              //     case "ArrowRight":
-              //   moveRight();
-              //   break;
-              //   case "ArrowLeft":
-              //       moveLeft();
-              //       break;
             }
-            // console.log(e.key);
           });
         }
       });
@@ -202,8 +233,12 @@
   <body>
     <div id="container">
       <div class="sliding-background"></div>
-      <img id="scarpy2" src="images/catwalk.webp" alt="" />
-      <img id="enemy" src="images/heart.png" alt="" />
+      <div id="cat-container"> 
+      <img id="cat" src="images/catwalk.webp" alt="" />
+      <div id="heatbox"></div>
+      <div id="heatbox2"></div>
+    </div>
+      <img id="enemy" src="images/drug.gif" alt="" />
       <div id="gameover_screen">
         Game Over
         <input type="button" class="restart" value="재시작" />
