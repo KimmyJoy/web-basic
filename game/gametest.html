@@ -11,19 +11,20 @@
     ></script>
     <title>Jumpingcat</title>
     <style>
-    @font-face {
-    font-family: 'Sam3KRFont';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Sam3KRFont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-* {
+      @font-face {
         font-family: "Sam3KRFont";
-        font-size: large;  
-}
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Sam3KRFont.woff")
+          format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      * {
+        font-family: "Sam3KRFont";
+        font-size: large;
+      }
       #container {
-        position: absolute;
+        position: relative;
         width: 500px;
         height: 300px;
         border: 2px black solid;
@@ -61,25 +62,6 @@
         border: 3px red solid;
         border-radius: 20%;
       }
-      /* 
-      #heatbox {
-        position: absolute;
-        left: 121px;
-        bottom: 48px;
-        width: 55px;
-        border: 3px red solid;
-        border-radius: 20%;
-      }
-      #heatbox2 {
-        position: absolute;
-        left: 120px;
-        bottom: 25px;
-        width: 45px;
-        height: 25px;
-        background-color: red;
-        border: 3px red solid;
-        border-radius: 20%;
-      } */
       #enemy {
         position: absolute;
         width: 50px;
@@ -90,6 +72,8 @@
       #score {
         float: right;
       }
+
+      
     </style>
     <script>
       //난이도 조절을 위한 상수 선언
@@ -159,7 +143,9 @@
           setInterval(function () {
             const catLeft = Number(cat.css("left").replace("px", ""));
             const catRight = catLeft + 50;
-            const catBottom = Number(cat.css("bottom").replace("px", ""));
+            const catBottom =  Number(
+              cat.css("bottom").replace("px", "")
+            );
             const enemyLeft = Number(enemy.css("left").replace("px", ""));
             const enemyRight = enemyLeft + 20;
             const enemyTop = 20;
@@ -170,7 +156,7 @@
               catLeft < enemyLeft;
 
             if (
-              isColliding(enemy[0], heatbox[0]) ||
+              isColliding(enemy[0], heatbox[0]) &&
               isColliding(enemy[0], heatbox2[0]) ||
               isGameOver
             ) {
@@ -180,17 +166,9 @@
             }
           }, 1000);
         }
-        //         // 재시작 버튼 클릭 이벤트 핸들러
-        //   $('#gameover_screen input[type="button"]').click(function () {
-        //     $('#gameover_screen').hide(); // 게임 오버 화면 숨김
-        //     gameStart(); // 게임 재시작
-        //   });
-
-        //충돌체크하는 함수
         function getRandomNumber(min, max) {
           return Math.floor(Math.random() * (max - min + 1)) + min;
         }
-
         function enemyStart() {
           // 속도 조절
           const speed = getRandomNumber(1000, 3000);
@@ -216,19 +194,34 @@
             // 재귀함수, 인터벌 등 방법으 여러가지 있음
           }); //맨뒤가 콜백임
         }
-
         function updateScore(score) {
           $("#score").text(score);
         }
+        function jump() {
+  if (!isJumping) {
+    isJumping = true; // isJumping 변수를 true로 설정합니다.
+    let position = 10;
+    let jumpingInterval = setInterval(function () {
+      if (position === 140) {
+        clearInterval(jumpingInterval);
+        let fallingInterval = setInterval(function () {
+          if (position === 10) {
+            clearInterval(fallingInterval);
+            isJumping = false; // 점프가 끝나면 isJumping 변수를 false로 설정합니다.
+          } else {
+            position -= 10;
+            cat.css({ bottom: position });
+          }
+        }, 50);
+      } else {
+        position += 10;
+        cat.css({ bottom: position });
+      }
+    }, 50);
+  }
+}
 
-        function jumP() {
-          isJumping = true;
-          cat
-            .animate({ bottom: "+=100px" })
-            .animate({ bottom: "-=100px" }, function () {
-              isJumping = false;
-            });
-        }
+
         // 키보드 이벤트 정의
         function setKeyboardEvent() {
           $("html").keydown(function (e) {
