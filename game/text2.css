@@ -30,26 +30,6 @@
     padding: -10%;
   }
 
-  /* #hitbox {
-    position: absolute;
-    left: 18px;
-    bottom: 37px;
-    width: 55px;
-    height: 5px;
-    border: 3px red solid;
-  }
-
-  #hitbox2 {
-    position: absolute;
-    left: 15px;
-    bottom: 15px;
-    width: 45px;
-    height: 25px;
-    background-color: red;
-    border: 3px red solid;
-    border-radius: 20%;
-  } */
-  
   #enemy {
     position: absolute;
     width: 45px;
@@ -122,13 +102,7 @@
     left: -40px;
     bottom: -70px;
   }
-  /* .sliding-background {
-      z-index: -100;
-      position: absolute;
-      background-image: url(images/field.jpg);
-      background-size: contain;
-      animation: slide 5s linear infinite;
-    } */
+ 
 #interface {
   position: absolute;
   width: 650px;
@@ -178,14 +152,3 @@
         transform: rotate(-360deg);
     }
 }
-
-
-  /* @keyframes slide {
-    from {
-      transform: translate(0, 0);
-    }
-
-    to {
-      transform: translate(-500px, 0);
-    }
-  } */

@@ -67,12 +67,12 @@ function checkGameOver() {
   const isGameOver =
     catRight > enemyLeft && catBottom < enemyTop && catLeft < enemyRight;
 
-  if (isGameOver && score < 0) {
-    $("#gameover_screen").show();
-    $("#gameovercat").show();
-  } else {
-    setTimeout(checkGameOver, 0);
-  }
+  // if (isGameOver && score < 0) {
+  //   $("#gameover_screen").show();
+  //   $("#gameovercat").show();
+  // } else {
+  //   setTimeout(checkGameOver, 0);
+  // }
 }
 
 function checkClear() {
@@ -96,7 +96,6 @@ $('#gameover_screen input[type="button"]').click(function () {
     const speed = getRandomNumber(2000, 6000);
     
     enemy.animate({ right: "550px" }, speed, "linear", function () {
-      //점수 올리자
       if (isColliding(cat, enemy) && $("#score") > 0) {
         score -= 100;
         updateScore(score);
@@ -105,7 +104,7 @@ $('#gameover_screen input[type="button"]').click(function () {
         $("#gameovercat").show();
       }
       //적 리셋
-      enemy.css("right");
+      enemy.css("right", "-70px");
       enemyStart();
       // 재귀함수, 인터벌 등 방법의 여러가지 있음
     }); //맨뒤가 콜백임
@@ -125,9 +124,9 @@ $('#gameover_screen input[type="button"]').click(function () {
         $("#gameclearcat").show();
         // 아이템 리셋
         item.css("right", "-70px");
+        itemStart();
       }
       // 아이템 재시작
-      itemStart();
     });
   }
 
@@ -137,7 +136,7 @@ function updateScore(score) {
 // let gameover = false;
 
 function jump() {
-  if (isJumping == true) {
+  if (isJumping) {
     return;
   }
   isJumping = true;
@@ -182,11 +181,9 @@ function resetGame() {
   cat.css("bottom", "10px");
 
   // 적 초기화
-  const enemy = $("#enemy");
   enemy.css("right", "-70px");
 
   // 아이템 초기화
-  const item = $("#item");
   item.css("right", "-70px");
 
   // 점수 초기화
