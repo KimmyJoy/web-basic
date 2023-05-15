@@ -23,7 +23,7 @@
 
   #cat {
     position: absolute;
-    left: 100px;
+    left: 40px;
     bottom: 10px;
     width: 85px;
     border: 2px pink solid;
@@ -52,10 +52,23 @@
   
   #enemy {
     position: absolute;
-    width: 50px;
-    transform: rotate(-20deg);
+    width: 45px;
+    top: auto;
     right: -50px;
-    bottom: 50px;
+    bottom: 100px;
+    animation: rotate_image 3s linear infinite;
+    transform-origin: 50% 50%; 
+  }
+
+
+  #alien {
+    position: absolute;
+    width: 45px;
+    top: auto;
+    right: -50px;
+    bottom: 100px;
+    animation: rotate_image 3s linear infinite;
+    transform-origin: 50% 50%; 
   }
 
   #score {
@@ -66,7 +79,7 @@
     position: absolute;
     width: 33.4em;
     height: 2.5em;
-    background-color: gainsboro;
+    background-color: rgba(126, 130, 133, 0.459);
     /* border: 2px rgb(121, 121, 121) solid; */
   }
 
@@ -86,7 +99,16 @@
       animation: slide 5s linear infinite;
     } */
 
-  @keyframes slide {
+    
+
+@keyframes rotate_image{
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+  /* @keyframes slide {
     from {
       transform: translate(0, 0);
     }
@@ -94,4 +116,4 @@
     to {
       transform: translate(-500px, 0);
     }
-  }
+  } */
