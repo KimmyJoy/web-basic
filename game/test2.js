@@ -12,9 +12,10 @@ $(function () {
 });
 
 function gameStart() {
-  // $('#gameover_screen').hide();
+  $("#gameclear_screen").hide();
+  $('#gameover_screen').hide();
   setKeyboardEvent();
-  enemyStart(); //난이도 조절을 위해서는 random함수를 써야함
+  // enemyStart(); //난이도 조절을 위해서는 random함수를 써야함
   itemStart();
   startBackgroundAnimation();
   checkGameOver();
@@ -86,11 +87,11 @@ function updateScore(score) {
 }
 
 
-//         // 재시작 버튼 클릭 이벤트 핸들러
-//   $('#gameover_screen input[type="button"]').click(function () {
-//     $('#gameover_screen').hide(); // 게임 오버 화면 숨김
-//     gameStart(); // 게임 재시작
-//   });
+  //       // 재시작 버튼 클릭 이벤트 핸들러
+  // $('#gameover_screen input[type="button"]').click(function () {
+  //   $('#gameover_screen').hide(); // 게임 오버 화면 숨김
+  //   gameStart(); // 게임 재시작
+  // });
 
 //충돌체크하는 함수
 function getRandomNumber(min, max) {
@@ -124,8 +125,13 @@ function itemStart() {
   //아군이 오른쪽에서 왼쪽으로 이동
   item.animate({ right: "550px" }, speed, "linear", function () {
     //점수 올리자
-    score += 100;
-    updateScore(score);
+    if($("#score") >= 20000){
+      updateScore(score);
+      $('#gameclear_screen').show();
+      } else {
+       score += 100;
+       updateScore(score);
+      }
 
     //적 리셋
     item.css("right", "-70px");

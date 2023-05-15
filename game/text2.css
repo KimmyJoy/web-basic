@@ -88,18 +88,33 @@
     width: 600px;
     height: 350px;
     background-color: rgba(0, 0, 0, 0.5);
-    display: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background-size: cover;
-    text-align: center;
     color: white;
   }
 
-  #gameovetext {
-    position: absolute;
-    font-size: 3em;
-    margin-top: 0.5em;
+  #gameovertext {
+    position: relative;
+    display: inline-block;
+    font-size: 1.5em;
+    text-align: center;
   }
 
+  #restart{
+    display: inline-block;
+    position: relative;
+    margin: 0px auto;
+  }
+
+  #gameovercat {
+    display: inline-block;
+    position: relative;
+    width: 26%;
+    left: 6px;
+    bottom: -43px;
+  }
   /* .sliding-background {
       z-index: -100;
       position: absolute;
