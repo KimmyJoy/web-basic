@@ -13,10 +13,10 @@
 
   #container {
     position: absolute;
-    width: 600px;
+    width: 650px;
     height: 350px;
     border: 2px black solid;
-    overflow: hidden;
+    /* overflow: hidden; */
     background-image: url(images/field.jpg);
     background-size: contain;
   }
@@ -54,7 +54,7 @@
     position: absolute;
     width: 45px;
     top: auto;
-    right: -50px;
+    right: -30px;
     bottom: 100px;
     animation: rotate_image 3s linear infinite;
     transform-origin: 50% 50%; 
@@ -65,19 +65,22 @@
     position: absolute;
     width: 45px;
     top: auto;
-    right: -50px;
+    right: -30px;
     bottom: 100px;
     animation: rotate_image 3s linear infinite;
     transform-origin: 50% 50%; 
   }
 
   #score {
+    font-size: x-large;
+    margin-top: 10px;
+    margin-right: 50px;
     float: right;
   }
 
   #ui {
     position: absolute;
-    width: 33.4em;
+    width: 36.2em;
     height: 2.5em;
     background-color: rgba(126, 130, 133, 0.459);
     /* border: 2px rgb(121, 121, 121) solid; */
@@ -85,7 +88,7 @@
 
   #gameover_screen {
     position: absolute;
-    width: 600px;
+    width: 650px;
     height: 350px;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
@@ -106,14 +109,18 @@
     display: inline-block;
     position: relative;
     margin: 0px auto;
+    background-color: rgb(213, 239, 255);
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 5px;
   }
 
   #gameovercat {
-    display: inline-block;
+    display: inline;
     position: relative;
-    width: 26%;
-    left: 6px;
-    bottom: -43px;
+    width: 50%;
+    left: -40px;
+    bottom: -70px;
   }
   /* .sliding-background {
       z-index: -100;
@@ -122,8 +129,49 @@
       background-size: contain;
       animation: slide 5s linear infinite;
     } */
+#interface {
+  position: absolute;
+  width: 650px;
+  height: 23px;
+  background-color: #E1D694;
+  bottom: 0px;
+}
 
-    
+#gameclear_screen {
+  position: absolute;
+  width: 650px;
+  height: 350px;
+  background-color: rgb(221, 206, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-size: cover;
+  color: white;
+}
+
+#gameclearcat {
+  display: inline;
+  position: relative;
+  width: 65%;
+  left: 40px;
+  bottom: -10px;
+}
+
+#gameclearcan {
+  display: inline;
+  position: relative;
+  width: 170px;
+  left: -70px;
+  bottom: 280px;
+}
+
+#gameclearcan2 {
+  display: inline;
+  position: relative;
+  width: 90px;
+  left: 365px;
+  bottom: 370px;
+}
 
 @keyframes rotate_image{
     100% {

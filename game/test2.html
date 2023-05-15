@@ -23,19 +23,24 @@
         <div id="hitbox2"></div> -->
       <!-- </div> -->
       <img id="enemy" src="images/gotuechamtich.png" alt="" />
-      <img id="item" src="images/chamtich.png" alt="" />
+      <img id="item" src="images/chamtich.png" alt="" /> 
+      <div id="interface">◀: 왼쪽 이동  ▶: 오른쪽 이동&nbsp;&nbsp;&nbsp;space:점프&nbsp;&nbsp;m:음소거&nbsp;&nbsp;p:일시정지</div>
       <div id="ui">
         <div id="score">0</div>
         <div id="gameover_screen">
           <p id="gameovertext">Game Over</p>
-          <button id="restart">재시작</button>
-          <img id="gameovercat" src="images/fail.gif" alt="" />
+          <button id="restart" onclick="window.location.reload()">재시작</button>
         </div>
+        <img id="gameovercat" src="images/fail.gif" alt="" />
       </div>
       <div id="gameclear_screen">
         <p id="gamecleartext">Game Clear</p>
-        <button id="restart2">재시작</button>
-        <img id="gameclearcat" src="images/clear.gif" alt="" />
+        <button id="restart2" onclick="window.location.reload()">다시하기</button>
+      </div>
+      <div id="clearscreen">
+      <img id="gameclearcat" src="images/clear.gif" alt="" />
+      <img id="gameclearcan" src="images/clearcan.png" alt="" />
+      <img id="gameclearcan2" src="images/clearbigcan.png" alt="" />
       </div>
     </div>
   </body>
