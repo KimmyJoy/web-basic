@@ -16,7 +16,7 @@
     width: 650px;
     height: 350px;
     border: 2px black solid;
-    /* overflow: hidden; */
+    overflow: hidden;
     background-image: url(images/field.jpg);
     background-size: contain;
   }
@@ -26,8 +26,7 @@
     left: 40px;
     bottom: 10px;
     width: 85px;
-    border: 2px pink solid;
-    padding: -10%;
+    /* border: 2px pink solid; */
   }
 
   #enemy {
@@ -120,15 +119,31 @@
   flex-direction: column;
   justify-content: center;
   background-size: cover;
-  color: white;
+  text-align: right;
+  font-size: x-large;
+}
+
+#gamecleartext {
+  position: relative;
+  display: inline-block;
+  font-size: 1.5em;
+  text-align: right;
+}
+
+#restart2 {
+  position: absolute;
+  display: inline-block;
+  margin: 0px auto;
+  bottom: 130px;
+  right: 10px;
 }
 
 #gameclearcat {
   display: inline;
   position: relative;
   width: 65%;
-  left: 40px;
-  bottom: -10px;
+  left: 10px;
+  bottom: 70px;
 }
 
 #gameclearcan {
@@ -136,15 +151,21 @@
   position: relative;
   width: 170px;
   left: -70px;
-  bottom: 280px;
+  bottom: 70px;
 }
 
 #gameclearcan2 {
   display: inline;
   position: relative;
   width: 90px;
-  left: 365px;
-  bottom: 370px;
+  left: 70px;
+  bottom: -20px;
+}
+
+
+#clearscreen {
+  display: inline-block;
+  position: relative;
 }
 
 @keyframes rotate_image{

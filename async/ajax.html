@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function loadDoc() {
+        const xhttp = new XMLHttpRequest();//제공이 되는 클래스 중의 하나임
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {//요청이 끝나고
+            document.getElementById("demo").innerHTML 
+            = this.responseText;//서버가 주는 값
+          }
+        };
+        //통신을 위한 메소드
+        // GET : 얻기
+        // POST : 써라
+        // UPDATE : 수정
+        // DELETE : 삭제
+        xhttp.open("GET", "ajax_info.txt", true);//두번째에 있는 것에 접근할 것이라는 것을 명시
+        xhttp.send();
+      }
+    </script>
+  </head>
+  <body>
+    <div id="demo">
+    </div>
+    <input type="button" value="실행" onclick="loadDoc()" />
+  </body>
+</html>
