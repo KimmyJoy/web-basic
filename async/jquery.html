@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.4.js"
+      integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function loadDoc() {
+        $('#demo').load('https://google.com');
+      }
+      //요즘은 jquery를 걷어내는 추세이다.????학교에서 jquery로 해달라....??는 요청이 있음(가는 회사에서 활용하기 때문일지도)
+    </script>
+  </head>
+  <body>
+    <div id="demo">
+    </div>
+    <input type="button" value="실행" onclick="loadDoc()" />
+  </body>
+</html>
