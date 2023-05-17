@@ -1,218 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upcoming Movies</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.4.js"
+      integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+      crossorigin="anonymous"
+    ></script>
+    <!-- 이미지 소스 
+    <a href="https://kr.freepik.com/free-vector/blank-screen-computer-icon-isolated-on-white-background_10163749.htm#query=%EB%AA%A8%EB%8B%88%ED%84%B0&position=3&from_view=keyword&track=sph">작가 brgfx</a> 출처 Freepik
+    -->
+    <style>
+      @font-face {
+        font-family: "SUIT-Regular";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
+          format("woff2");
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        background-image: url("../img/blank-screen-computer-icon-isolated-on-white-background_101637-3.jpg");
+        background-color: #f3f0e8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        font-family: SUIT-Regular, sans-serif;
+        font-weight: bolder;
+        text-align: center;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Upcoming Movies</title>
-  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
-    crossorigin="anonymous"></script>
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
 
-  <style>
-    @font-face {
-      font-family: 'SUIT-Regular';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
-      font-weight: normal;
-      font-style: normal;
-    }
+      .card {
+        border: 1px solid #f8d48736;
+        border-radius: 4px;
+        margin: 10px;
+        box-shadow: 0 2px 4px rgb(0, 0, 0);
+        background: linear-gradient(30deg, #92511433, #d8b689, transparent);
+        width: 300px;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
 
-    body {
-      background-color: #f3f0e8;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: auto;
-      font-family: SUIT-Regular, sans-serif;
-      font-weight: bolder;
-      text-align: center;
-    }
+      .card:hover {
+        /* 마우스 커서가 올라가면 하단에 기재된 축으로 px만큼 이동 */
+        transform: translateY(-5px);
+      }
 
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+      .card img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+      }
 
-    .card {
-      border: 1px solid #f8d48736;
-      border-radius: 4px;
-      margin: 10px;
-      box-shadow: 0 2px 4px rgb(0, 0, 0);
-      background: linear-gradient(30deg, #92511433, #d8b689, transparent);
-      width: 300px;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
+      .card .movie-details {
+        padding: 10px;
+      }
 
-    .card:hover {
-      /* 마우스 커서가 올라가면 하단에 기재된 축으로 px만큼 이동 */
-      transform: translateY(-5px);
-    }
+      .card h3 {
+        margin: 0;
+        font-size: 18px;
+        font-style: italic;
+      }
 
-    .card img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
-    }
+      .card p {
+        margin: 5% 0;
+        font-size: 14px;
+        color: #5c462cb0;
+      }
+    </style>
+  <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+      async function loadMovies() {
+        const response = await fetch(
+          "https://api.themoviedb.org/3/movie/upcoming?api_key=a64533e7ece6c72731da47c9c8bc691f&language=ko-KR&page=1"
+        );
+        const data = await response.json();
+        const movies = data.results;
 
-    .card .movie-details {
-      padding: 10px;
-    }
+        const container = document.createElement("div");
+        container.classList.add("container");
 
-    .card h3 {
-      margin: 0;
-      font-size: 18px;
-      font-style: italic;
-    }
+        movies.forEach((movie) => {
+          const card = document.createElement("div");
+          card.classList.add("card");
+          card.setAttribute("data-movieid", movie.id);
 
-    .card p {
-      margin: 5% 0;
-      font-size: 14px;
-      color: #5c462cb0;
-    }
-    
-    .custom-header {
-      height: 720px;
-      position: relative;
-    }
-    
-    .custom-header iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
+          const image = document.createElement("img");
+          image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+          image.alt = movie.title;
 
-    .carousel {
-      width: 600px;
-      height: 400px;
-      margin: 0 auto;
-      overflow: hidden;
-      position: relative;
-    }
+          const movieDetails = document.createElement("div");
+          movieDetails.classList.add("movie-details");
 
-    .carousel-inner {
-      display: flex;
-      width: fit-content;
-      transition: transform 0.5s ease;
-    }
+          const title = document.createElement("h3");
+          title.textContent = movie.title;
 
-    .carousel-item {
-      width: 600px;
-      height: 400px;
-      margin-right: 10px;
-    }
+          const releaseDate = document.createElement("p");
+          releaseDate.textContent = movie.release_date;
 
-    .carousel-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 4px;
-    }
+          movieDetails.appendChild(title);
+          movieDetails.appendChild(releaseDate);
 
-    .carousel-controls {
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-    }
+          card.appendChild(image);
+          card.appendChild(movieDetails);
 
-    .carousel-control {
-      cursor: pointer;
-      font-size: 24px;
-      margin: 0 5px;
-    }
-  </style>
-
-  <script>
-    async function loadMovies() {
-      const response = await fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=a64533e7ece6c72731da47c9c8bc691f&language=ko-KR&page=1');
-      const data = await response.json();
-      const movies = data.results;
-
-      const container = document.createElement('div');
-      container.classList.add('container');
-
-      const carousel = document.createElement('div');
-      carousel.classList.add('carousel');
-
-      const carouselInner = document.createElement('div');
-      carouselInner.classList.add('carousel-inner');
-
-      movies.slice(0, 5).forEach(movie => {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.setAttribute('data-movieid', movie.id);
-
-        const image = document.createElement('img');
-        image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-        image.alt = movie.title;
-
-        const movieDetails = document.createElement('div');
-        movieDetails.classList.add('movie-details');
-
-        const title = document.createElement('h3');
-        title.textContent = movie.title;
-
-        const releaseDate = document.createElement('p');
-        releaseDate.textContent = movie.release_date;
-
-        movieDetails.appendChild(title);
-        movieDetails.appendChild(releaseDate);
-
-        card.appendChild(image);
-        card.appendChild(movieDetails);
-
-        container.appendChild(card);
-        carouselInner.appendChild(card);
-      });
-      carousel.appendChild(carouselInner);
-      document.body.appendChild(container);
-
-      const prevBtn = document.createElement('span');
-      prevBtn.classList.add('carousel-control');
-      prevBtn.innerHTML = '&#9664;';
-      prevBtn.addEventListener('click', function () {
-        carouselInner.style.transform = 'translateX(-620px)';
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'block';
-      });
-
-      const nextBtn = document.createElement('span');
-      nextBtn.classList.add('carousel-control');
-      nextBtn.innerHTML = '&#9654;';
-      nextBtn.style.display = 'none';
-      nextBtn.addEventListener('click', function () {
-        carouselInner.style.transform = 'translateX(0)';
-        prevBtn.style.display = 'block';
-        nextBtn.style.display = 'none';
-      });
-
-      const carouselControls = document.createElement('div');
-      carouselControls.classList.add('carousel-controls');
-      carouselControls.appendChild(prevBtn);
-      carouselControls.appendChild(nextBtn);
-
-      carousel.appendChild(carouselControls);
-      document.body.appendChild(carousel);
-
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        card.addEventListener('click', function () {
-          const movieId = '7oKAPbnl7mQ';
-          const videoContainer = document.querySelector('.custom-header');
-          videoContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/CHE0nfZAiJo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+          container.appendChild(card);
         });
+
+        document.body.appendChild(container);
+
+        const cards = document.querySelectorAll(".card");
+
+        cards.forEach((card) => {
+          card.addEventListener("click", function () {
+            const movieId = this.getAttribute("data-movieid");
+            const videoContainer = document.getElementById("player");
+            videoContainer.innerHTML = ""; // 이전에 생성된 영상 제거
+
+            const player = new YT.Player("player", {
+              height: "360",
+              width: "640",
+              videoId: getVideoId(movieId),
+            });
+          });
+        });
+      }
+       // Load the YouTube IFrame Player API asynchronously
+    let tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    let firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // Player variables
+    let player;
+    let playerReady = false;
+
+    // Function to create and control the YouTube player
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '100%',
+        width: '100%',
+        videoId: '', // Initially set an empty video ID
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          loop: 1,
+          modestbranding: 1,
+          mute: 1,
+          playsinline: 1
+        },
+        events: {
+          onReady: function() {
+            playerReady = true;
+          }
+        }
       });
     }
-  </script>
-</head>
 
-<body onload="loadMovies()">
-  <div class="custom-header"></div>
-</body>
+    // Function to play the YouTube video in the background
+    function playBackgroundVideo(videoId) {
+      if (playerReady) {
+        player.loadVideoById(videoId);
+      } else {
+        setTimeout(function() {
+          playBackgroundVideo(videoId);
+        }, 100);
+      }
+    }
 
+    // Add event listeners to movie cards
+    let cards = document.querySelectorAll('.card');
+    cards.forEach(function(card) {
+      card.addEventListener('click', function() {
+        var videoId = 'VIDEO_ID'; // Replace with the actual video ID from the API
+        playBackgroundVideo(videoId);
+      });
+    });
+    </script>
+  </head>
+  <body onload="loadMovies()">
+    <div id="player"></div>
 </html>
