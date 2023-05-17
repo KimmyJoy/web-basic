@@ -74,17 +74,56 @@
       color: #5c462cb0;
     }
     
-    .header {
+    .custom-header {
       height: 720px;
       position: relative;
     }
     
-    .header iframe {
+    .custom-header iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+    }
+
+    .carousel {
+      width: 600px;
+      height: 400px;
+      margin: 0 auto;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .carousel-inner {
+      display: flex;
+      width: fit-content;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel-item {
+      width: 600px;
+      height: 400px;
+      margin-right: 10px;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .carousel-control {
+      cursor: pointer;
+      font-size: 24px;
+      margin: 0 5px;
     }
   </style>
 
@@ -97,48 +136,83 @@
       const container = document.createElement('div');
       container.classList.add('container');
 
-  movies.forEach(movie => {
-    const card = document.createElement('div');
-    card.classList.add('card');
-    card.setAttribute('data-movieid', movie.id);
+      const carousel = document.createElement('div');
+      carousel.classList.add('carousel');
 
-    const image = document.createElement('img');
-    image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-    image.alt = movie.title;
+      const carouselInner = document.createElement('div');
+      carouselInner.classList.add('carousel-inner');
 
-    const movieDetails = document.createElement('div');
-    movieDetails.classList.add('movie-details');
+      movies.slice(0, 5).forEach(movie => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.setAttribute('data-movieid', movie.id);
 
-    const title = document.createElement('h3');
-    title.textContent = movie.title;
+        const image = document.createElement('img');
+        image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+        image.alt = movie.title;
 
-    const releaseDate = document.createElement('p');
-    releaseDate.textContent = movie.release_date;
+        const movieDetails = document.createElement('div');
+        movieDetails.classList.add('movie-details');
 
-    movieDetails.appendChild(title);
-    movieDetails.appendChild(releaseDate);
+        const title = document.createElement('h3');
+        title.textContent = movie.title;
 
-    card.appendChild(image);
-    card.appendChild(movieDetails);
+        const releaseDate = document.createElement('p');
+        releaseDate.textContent = movie.release_date;
 
-    container.appendChild(card);
-  });
+        movieDetails.appendChild(title);
+        movieDetails.appendChild(releaseDate);
 
-  document.body.appendChild(container);
+        card.appendChild(image);
+        card.appendChild(movieDetails);
 
-  const cards = document.querySelectorAll('.card');
-  cards.forEach(card => {
-    card.addEventListener('click', function () {
-      const movieId = '7oKAPbnl7mQ';
-      const videoContainer = document.querySelector('.header');
-      videoContainer.innerHTML = `<src="https://youtu.be/CHE0nfZAiJo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></src=>`;
-    });
-  });
-}
+        container.appendChild(card);
+        carouselInner.appendChild(card);
+      });
+      carousel.appendChild(carouselInner);
+      document.body.appendChild(container);
 
-</script>
+      const prevBtn = document.createElement('span');
+      prevBtn.classList.add('carousel-control');
+      prevBtn.innerHTML = '&#9664;';
+      prevBtn.addEventListener('click', function () {
+        carouselInner.style.transform = 'translateX(-620px)';
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'block';
+      });
+
+      const nextBtn = document.createElement('span');
+      nextBtn.classList.add('carousel-control');
+      nextBtn.innerHTML = '&#9654;';
+      nextBtn.style.display = 'none';
+      nextBtn.addEventListener('click', function () {
+        carouselInner.style.transform = 'translateX(0)';
+        prevBtn.style.display = 'block';
+        nextBtn.style.display = 'none';
+      });
+
+      const carouselControls = document.createElement('div');
+      carouselControls.classList.add('carousel-controls');
+      carouselControls.appendChild(prevBtn);
+      carouselControls.appendChild(nextBtn);
+
+      carousel.appendChild(carouselControls);
+      document.body.appendChild(carousel);
+
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.addEventListener('click', function () {
+          const movieId = '7oKAPbnl7mQ';
+          const videoContainer = document.querySelector('.custom-header');
+          videoContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/CHE0nfZAiJo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        });
+      });
+    }
+  </script>
 </head>
+
 <body onload="loadMovies()">
-  <div class="header"></div>
+  <div class="custom-header"></div>
 </body>
+
 </html>

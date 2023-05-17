@@ -1,129 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upcoming Movies</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.4.js"
+      integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+      crossorigin="anonymous"
+    ></script>
+    <!-- 이미지 소스 
+    <a href="https://kr.freepik.com/free-vector/blank-screen-computer-icon-isolated-on-white-background_10163749.htm#query=%EB%AA%A8%EB%8B%88%ED%84%B0&position=3&from_view=keyword&track=sph">작가 brgfx</a> 출처 Freepik
+    -->
+    <style>
+      @font-face {
+        font-family: "SUIT-Regular";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
+          format("woff2");
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        background-image: url("../img/blank-screen-computer-icon-isolated-on-white-background_101637-3.jpg");
+        background-color: #f3f0e8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        font-family: SUIT-Regular, sans-serif;
+        font-weight: bolder;
+        text-align: center;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Upcoming Movies</title>
-  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
-    crossorigin="anonymous"></script>
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
 
-  <style>
-@font-face {
-    font-family: 'SUIT-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-    body {
-      background-color: #f3f0e8;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: auto;
-      font-family: SUIT-Regular, sans-serif;
-      font-weight: bolder;
-      text-align: center;
-    }
+      .card {
+        border: 1px solid #f8d48736;
+        border-radius: 4px;
+        margin: 10px;
+        box-shadow: 0 2px 4px rgb(0, 0, 0);
+        background: linear-gradient(30deg, #92511433, #d8b689, transparent);
+        width: 300px;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
 
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+      .card:hover {
+        /* 마우스 커서가 올라가면 하단에 기재된 축으로 px만큼 이동 */
+        transform: translateY(-5px);
+      }
 
-    .card {
-      border: 1px solid #f8d48736;
-      border-radius: 4px;
-      margin: 10px;
-      box-shadow: 0 2px 4px rgb(0, 0, 0);
-      background: linear-gradient(30deg, #92511433, #d8b689, transparent);
-      width: 300px;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
+      .card img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+      }
 
-    .card:hover {
-      /* 마우스 커서가 올라가면 하단에 기재된 축으로 px만큼 이동 */
-      transform: translateY(-5px);
-    }
+      .card .movie-details {
+        padding: 10px;
+      }
 
-    .card img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
-    }
+      .card h3 {
+        margin: 0;
+        font-size: 18px;
+        font-style: italic;
+      }
 
-    .card .movie-details {
-      padding: 10px;
-    }
+      .card p {
+        margin: 5% 0;
+        font-size: 14px;
+        color: #5c462cb0;
+      }
+    </style>
 
-    .card h3 {
-      margin: 0;
-      font-size: 18px;
-      font-style: italic;
-    }
+    <script>
+      async function loadMovies() {
+        const response = await fetch(
+          "https://api.themoviedb.org/3/movie/upcoming?api_key=a64533e7ece6c72731da47c9c8bc691f&language=ko-KR&page=1"
+        );
+        const data = await response.json();
+        const movies = data.results;
 
-    .card p {
-      margin: 5% 0;
-      font-size: 14px;
-      color: #5c462cb0;
-    }
-  </style>
+        const container = document.createElement("div");
+        container.classList.add("container");
 
-  <script>
-    async function loadMovies() {
-      const response = await fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=a64533e7ece6c72731da47c9c8bc691f&language=ko-KR&page=1');
-      const data = await response.json();
-      const movies = data.results;
+        movies.forEach((movie) => {
+          const card = document.createElement("div");
+          card.classList.add("card");
+          card.setAttribute("data-movieid", movie.id);
 
-      const container = document.createElement('div');
-      container.classList.add('container');
+          const image = document.createElement("img");
+          image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+          image.alt = movie.title;
 
-      movies.forEach(movie => {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.setAttribute('data-movieid', movie.id);
+          const movieDetails = document.createElement("div");
+          movieDetails.classList.add("movie-details");
 
-        const image = document.createElement('img');
-        image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-        image.alt = movie.title;
+          const title = document.createElement("h3");
+          title.textContent = movie.title;
 
-        const movieDetails = document.createElement('div');
-        movieDetails.classList.add('movie-details');
+          const releaseDate = document.createElement("p");
+          releaseDate.textContent = movie.release_date;
 
-        const title = document.createElement('h3');
-        title.textContent = movie.title;
+          movieDetails.appendChild(title);
+          movieDetails.appendChild(releaseDate);
 
-        const releaseDate = document.createElement('p');
-        releaseDate.textContent = movie.release_date;
+          card.appendChild(image);
+          card.appendChild(movieDetails);
 
-        movieDetails.appendChild(title);
-        movieDetails.appendChild(releaseDate);
+          container.appendChild(card);
+        });
 
-        card.appendChild(image);
-        card.appendChild(movieDetails);
+        document.body.appendChild(container);
 
-        container.appendChild(card);
-      });
+        const cards = document.querySelectorAll(".card");
 
-      document.body.appendChild(container);
+        cards.forEach((card) => {
 
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        card.addEventListener('click', function ()
-        {
-const movieId = this.getAttribute('data-movieid');
-window.location.href = `https://www.themoviedb.org/movie/${movieId}`;
-});
-});
-}
-</script>
-
-</head>
-<body onload="loadMovies()">
-</body>
+          card.addEventListener("click", function () {
+            const movieId = this.getAttribute("data-movieid");
+            window.location.href = `230516_exam05-2.html?movieId=${movieId}`;
+          });
+        });
+      }
+    </script>
+  </head>
+  <body onload="loadMovies()"></body>
 </html>
