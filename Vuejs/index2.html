@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- input 란에 글을 적으면 하단에 보임 -->
+        <input v-model="message">
+        <div>
+        {{ message }}
+    </div>
+    </div>
+
+    <script>
+
+const app = new Vue({
+     el: '#app', 
+     data: {
+       message: ' '
+     }
+   })
+//제대로 입력을 받기 위해서는 body 태그 안에 있는 message 부분이 전부 동일해야함
+    </script>
+</body>
+</html>

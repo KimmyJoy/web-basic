@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ message }}
+    </div>
+
+    <script>
+//위에가 실행되고 아래가 실행되게 하려면 이런 형태로 script 부분이 들어와도 됨
+var app = new Vue({ //이 중괄호 안에 들어오는 것들은 json이다
+     el: '#app', //el은 element의 약자(selector 같은거임)
+     data: {//data는 vue의 기본적인 데이터를 의미함
+       message: 'Hello World!'
+     }
+   })
+
+    </script>
+</body>
+</html>

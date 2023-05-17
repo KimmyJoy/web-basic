@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- input 란에 글을 적으면 하단에 보임 -->
+        <input type="text" v-model="message">
+        <div>
+        {{ upperCaseMessage }}
+    </div>
+    <br>
+    <input v-on:click="reverseMessage" type="button" value="뒤집기">
+    </div>
+    <script>
+
+const app = new Vue({
+     el: '#app', 
+     data: {
+       message: ' '
+     },
+     computed: {//관찰하고 있다가 변화가 생기면 자동으로 실행됨
+        upperCaseMessage: function(){
+            //대문자로 변환해서 내보내줌
+             return this.message.toUpperCase();
+         }
+        },
+        created: function () {
+            //생성자
+            console.log('생성자!!!!!!!!!!!!');
+        },
+        methods: {
+    reverseMessage: function () {
+      this.message = this.message.split('').reverse().join('')
+    }
+  }
+})
+</script>
+
+    
+</body>
+</html>
